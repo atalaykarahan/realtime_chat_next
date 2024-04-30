@@ -1,7 +1,7 @@
 const HomePage = () => {
   return (
     <div>
-      <p>this screen for when user successful login he can see it</p>
+      <h1>after login use saw this page</h1>
     </div>
   );
 };

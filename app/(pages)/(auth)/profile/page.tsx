@@ -1,7 +1,9 @@
-const ProfilePage = () => {
-    return ( <div>
-        <h1>This is for if user wants a change profile settings then he can see it</h1>
-    </div> );
+const ProfileSettingsPage = () => {
+    return ( 
+        <div>
+            <h1>this is for profile settings</h1>
+        </div>
+    );
 }
  
-export default ProfilePage;
+export default ProfileSettingsPage;

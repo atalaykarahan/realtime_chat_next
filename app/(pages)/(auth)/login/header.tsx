@@ -17,7 +17,7 @@ const Header = () => {
   ];
   return (
     <>
-      <h2 className="text-white text-2xl md:text-6xl font-bold text-center">
+      <h2 className="text-white text-4xl md:text-6xl font-bold text-center">
         <TypewriterEffectSmooth words={words} />
       </h2>
     </>

@@ -20,20 +20,20 @@ const DummyData = () => {
           </div>
           <div className="block">
             <div className="truncate max-w-[120px]">
-              <span className="text-sm text-default-900 font-medium">
+              <span className="text-sm text-white  font-medium">
                 {" "}
                 Felecia Rower
               </span>
             </div>
             <div className="truncate  max-w-[120px]">
-              <span className=" text-xs  text-default-600 ">
+              <span className=" text-xs  text-[#5C6B81] ">
                 If it takes long you can mail me at my mail address.
               </span>
             </div>
           </div>
         </div>
         <div className="flex-none  flex-col items-end  gap-2 hidden lg:flex">
-          <span className="text-xs text-default-600 text-end uppercase">
+          <span className="text-xs text-white text-end uppercase ">
             10 am
           </span>
           <span className="h-[14px] w-[14px] flex items-center justify-center bg-default-400 rounded-full text-primary-foreground text-[10px] font-medium">

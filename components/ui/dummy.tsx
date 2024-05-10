@@ -7,7 +7,7 @@ const DummyData = () => {
       <div className="gap-4 py-2 lg:py-2.5 px-3 border-l-2 border-transparent hover:bg-default-200 cursor-pointer flex">
         <div className="flex-1 flex  gap-3 ">
           <div className="relative inline-block ">
-            <span className="relative flex h-10 w-10 shrink-0 overflow-hidden rounded-full">
+            <span className="relative flex h-12 w-12 shrink-0 overflow-hidden rounded-full">
               <Image
               width={40}
               height={40}
@@ -20,20 +20,20 @@ const DummyData = () => {
           </div>
           <div className="block">
             <div className="truncate max-w-[120px]">
-              <span className="text-sm text-default-900 font-medium">
+              <span className="text-sm text-white  font-medium">
                 {" "}
                 Felecia Rower
               </span>
             </div>
             <div className="truncate  max-w-[120px]">
-              <span className=" text-xs  text-default-600 ">
+              <span className=" text-xs  text-[#5C6B81] ">
                 If it takes long you can mail me at my mail address.
               </span>
             </div>
           </div>
         </div>
         <div className="flex-none  flex-col items-end  gap-2 hidden lg:flex">
-          <span className="text-xs text-default-600 text-end uppercase">
+          <span className="text-xs text-white text-end uppercase ">
             10 am
           </span>
           <span className="h-[14px] w-[14px] flex items-center justify-center bg-default-400 rounded-full text-primary-foreground text-[10px] font-medium">

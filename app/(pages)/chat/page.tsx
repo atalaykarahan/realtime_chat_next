@@ -11,19 +11,20 @@ const HomePage = () => {
       style={{ zIndex: "1" }}
     >
       <CustomCard className="hidden lg:block flex-none min-w-[260px]">
-        <UserProfile/>
-        <DummyData />
-        <DummyData />
-        <DummyData />
-        <DummyData />
-        <DummyData />
-        <DummyData />
-        <DummyData />
-        <DummyData />
-        <DummyData />
-        <DummyData />
-        <DummyData />
-        <DummyData />
+        <UserProfile />
+        <div className="pt-3">
+          <DummyData />
+          <DummyData />
+          <DummyData />
+          <DummyData />
+          <DummyData />
+          <DummyData />
+          <DummyData />
+          <DummyData />
+          <DummyData />
+          <DummyData />
+          <DummyData />
+        </div>
       </CustomCard>
       <CustomCard className="flex-1 flex flex-col justify-between">
         <ChatNavbar />

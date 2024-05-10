@@ -7,7 +7,7 @@ const DummyData = () => {
       <div className="gap-4 py-2 lg:py-2.5 px-3 border-l-2 border-transparent hover:bg-default-200 cursor-pointer flex">
         <div className="flex-1 flex  gap-3 ">
           <div className="relative inline-block ">
-            <span className="relative flex h-10 w-10 shrink-0 overflow-hidden rounded-full">
+            <span className="relative flex h-12 w-12 shrink-0 overflow-hidden rounded-full">
               <Image
               width={40}
               height={40}

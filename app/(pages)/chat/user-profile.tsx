@@ -1,10 +1,12 @@
 "use client";
+import { Input } from "@/components/ui/input";
 import Image from "next/image";
-
+import { PiDotsThreeCircleLight } from "react-icons/pi";
+import { Search } from "@/components/ui/search";
 export default function UserProfile() {
   return (
     <>
-      <div>
+      <div className="px-3 py-5 border-b border-[#5C6B81]">
         <div className="gap-4 flex">
           <div className="flex-1 flex  gap-3 ">
             <div className="relative inline-block ">
@@ -31,6 +33,12 @@ export default function UserProfile() {
               </div>
             </div>
           </div>
+          <div className="flex items-center gap-2">
+            <PiDotsThreeCircleLight className="text-[#4A32B0] text-[2rem]"/>
+          </div>
+        </div>
+        <div className="pt-5">
+          <Search placeholder="Search by name"/>
         </div>
       </div>
     </>

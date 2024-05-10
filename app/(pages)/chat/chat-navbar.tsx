@@ -6,6 +6,7 @@ import { RxHamburgerMenu } from "react-icons/rx";
 import Image from "next/image";
 import { LuPhone, LuInfo } from "react-icons/lu";
 import { HiOutlineDotsVertical } from "react-icons/hi";
+import { Input } from "@/components/ui/input";
 
 const navigation = [
   { name: "Dashboard", href: "#", current: true },
@@ -53,6 +54,7 @@ export default function ChatNavbar() {
                       </div>
                     </div>
                   </div>
+                  
                 </div>
               </div>
               <div className="flex items-center gap-5">

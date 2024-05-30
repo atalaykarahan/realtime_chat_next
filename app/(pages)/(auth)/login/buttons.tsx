@@ -16,4 +16,7 @@ const Buttons = () => {
         <Link href={""}>LinkedIn</Link>
       </Button>
     </div>
-  ); 
+  );
+};
+
+export default Buttons;

@@ -1,5 +1,13 @@
 "use client";
-import { Form, FormField } from "@/components/ui/form";
+import FormError from "@/components/form-error";
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "@/components/ui/form";
 import { AnimationInput } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { cn } from "@/lib/utils";
@@ -18,6 +26,7 @@ const CreateNameForm = () => {
 
   const onSubmit = (values: z.infer<typeof UsernameSchemas>) => {
     console.log("Form submitted");
+    console.log(values);
   };
 
   return (
@@ -27,15 +36,22 @@ const CreateNameForm = () => {
           control={form.control}
           name="username"
           render={({ field }) => (
-            <LabelInputContainer className="mb-4">
-              <Label htmlFor="username">Kullanıcı Adı</Label>
-              <AnimationInput
-                {...field}
-                id="username"
-                placeholder="Kullanıcı adı giriniz..."
-                type="text"
-              />
-            </LabelInputContainer>
+            <FormItem>
+              <LabelInputContainer className="mb-4">
+                <FormLabel>
+                  <Label htmlFor="username">Kullanıcı Adı</Label>
+                </FormLabel>
+                <FormMessage />
+                <FormControl>
+                  <AnimationInput
+                    {...field}
+                    id="username"
+                    placeholder="Kullanıcı adı giriniz..."
+                    type="text"
+                  />
+                </FormControl>
+              </LabelInputContainer>
+            </FormItem>
           )}
         />
         {/* <FormError message={errorMessage} /> */}

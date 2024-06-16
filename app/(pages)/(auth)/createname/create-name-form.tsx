@@ -1,5 +1,4 @@
 "use client";
-
 import { Form, FormField } from "@/components/ui/form";
 import { AnimationInput } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";

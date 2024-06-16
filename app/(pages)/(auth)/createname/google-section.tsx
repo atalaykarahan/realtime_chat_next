@@ -1,10 +1,11 @@
 "use client";
-import { FcGoogle } from "react-icons/fc";
+import { jwtDecode } from "jwt-decode";
 import Image from "next/image";
-import { IoIosLogOut } from "react-icons/io";
+import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
-import { jwtDecode } from "jwt-decode";
+import { FcGoogle } from "react-icons/fc";
+import { IoIosLogOut } from "react-icons/io";
 
 interface googleInformation {
   user_email: string;
@@ -26,7 +27,6 @@ const GoogleSection = () => {
       try {
         const decodedToken: googleInformation = jwtDecode(token);
         setUserInfo(decodedToken);
-        console.log(decodedToken);
       } catch (error) {
         console.error("Invalid token:", error);
       }
@@ -58,9 +58,12 @@ const GoogleSection = () => {
           </div>
         </div>
 
-        <button className="text-gray-500  hover:text-gray-700  duration-300">
+        <Link
+          href="/"
+          className="text-gray-500  hover:text-gray-700  duration-300"
+        >
           <IoIosLogOut className="h-[1.7rem] w-auto" />
-        </button>
+        </Link>
       </div>
     </div>
   );

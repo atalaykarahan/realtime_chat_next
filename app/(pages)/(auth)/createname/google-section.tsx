@@ -2,10 +2,13 @@
 import { jwtDecode } from "jwt-decode";
 import Image from "next/image";
 import Link from "next/link";
-import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import { FcGoogle } from "react-icons/fc";
 import { IoIosLogOut } from "react-icons/io";
+
+interface GoogleSectionProps {
+  token: string;
+}
 
 interface googleInformation {
   user_email: string;
@@ -13,9 +16,7 @@ interface googleInformation {
   user_photo: string;
 }
 
-const GoogleSection = () => {
-  const searchParams = useSearchParams();
-  const token = searchParams.get("token");
+const GoogleSection = ({ token }: GoogleSectionProps) => {
   const [userInfo, setUserInfo] = useState<googleInformation | undefined>({
     user_email: "",
     user_name: "",

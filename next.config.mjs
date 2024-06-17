@@ -5,7 +5,7 @@ const nextConfig = {
   },
   images: {
     unoptimized: true,
-    domains: ["dash-tail.vercel.app"],
+    domains: ["dash-tail.vercel.app", "lh3.googleusercontent.com", "i.hizliresim.com"],
   },
 };
 

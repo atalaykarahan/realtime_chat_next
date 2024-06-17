@@ -25,7 +25,7 @@ interface CreateNameFormProps {
 }
 
 const CreateNameForm = ({ token }: CreateNameFormProps) => {
-  const [isPending, startTransition] = useTransition();
+  const [isPending, setIsPending] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
   const router = useRouter();
 
@@ -38,31 +38,25 @@ const CreateNameForm = ({ token }: CreateNameFormProps) => {
   });
   //#endregion
 
-  const onSubmit = (values: z.infer<typeof UsernameSchemas>) => {
-    startTransition(() => {
-      try {
-        signup(token, values.username).then(
-          (res: any) => {
-            //kullanici basariliyla yaratildi demektir
-            if (res.status == 201) {
-              router.push("/chat");
-            } else {
-              setErrorMessage("Bilinmeyen bir hata oluştu");
-            }
-          },
-          (error: any) => {
-            if (error.response.data.statusCode == 409) {
-              setErrorMessage("Bu kullanıcı adı zaten kullanılmakta.");
-            } else {
-              setErrorMessage("Bilinmeyen bir hata oluştu");
-            }
-            console.log(error);
-          }
-        );
-      } catch (error) {
-        console.log("Kullanıcı adı kısmında bir sorun oluştu ", error);
+  const onSubmit = async (values: z.infer<typeof UsernameSchemas>) => {
+    setIsPending(true);
+    try {
+      const res = await signup(token, values.username);
+      if (res.status === 201) {
+        router.push("/chat");
+      } else {
+        setErrorMessage("Bilinmeyen bir hata oluştu");
       }
-    });
+    } catch (error: any) {
+      if (error.response.data.statusCode == 409) {
+        setErrorMessage("Bu kullanıcı adı zaten kullanılmakta.");
+      } else {
+        setErrorMessage("Bilinmeyen bir hata oluştu");
+      }
+      console.log(error);
+    } finally {
+      setIsPending(false);
+    }
   };
 
   return (
@@ -94,10 +88,11 @@ const CreateNameForm = ({ token }: CreateNameFormProps) => {
         <FormError className="mb-3" message={errorMessage} />
 
         <button
+          disabled={isPending}
           className="bg-gradient-to-br relative group/btn bg-black w-full text-white rounded-md h-10 font-medium "
           type="submit"
         >
-          Kayıt Ol &rarr;
+          {isPending ? "Kontrol Ediliyor..." : "Kayıt Ol"}
         </button>
       </form>
     </Form>

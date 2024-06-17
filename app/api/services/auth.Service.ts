@@ -8,6 +8,7 @@ export const signup = async (token: string, username: string) => {
       headers: {
         Authorization: token,
       },
+      withCredentials: true
     }
   );
 };

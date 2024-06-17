@@ -1,5 +1,6 @@
 "use client";
 import { signup } from "@/app/api/services/auth.Service";
+import CustomCard from "@/components/custom-card";
 import FormError from "@/components/form-error";
 import {
   Form,
@@ -48,7 +49,7 @@ const CreateNameForm = ({ token }: CreateNameFormProps) => {
         setErrorMessage("Bilinmeyen bir hata oluştu");
       }
     } catch (error: any) {
-      if (error.response.data.statusCode == 409) {
+      if (error.response.data.code == 409) {
         setErrorMessage("Bu kullanıcı adı zaten kullanılmakta.");
       } else {
         setErrorMessage("Bilinmeyen bir hata oluştu");
@@ -60,6 +61,11 @@ const CreateNameForm = ({ token }: CreateNameFormProps) => {
   };
 
   return (
+    <>
+    
+
+    
+
     <Form {...form}>
       <form {...form} className="" onSubmit={form.handleSubmit(onSubmit)}>
         <FormField
@@ -96,6 +102,7 @@ const CreateNameForm = ({ token }: CreateNameFormProps) => {
         </button>
       </form>
     </Form>
+    </>
   );
 };
 

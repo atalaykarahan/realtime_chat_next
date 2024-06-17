@@ -11,3 +11,4 @@ export const signup = async (token: string, username: string) => {
     }
   );
 };
+

@@ -37,7 +37,7 @@ export const { auth, handlers, signIn, signOut } = NextAuth({
       if (!token.sub) return token;
 
       const existingUser = await getLoggedInUserServer();
-      if (existingUser.error) return token;
+      if (existingUser.error) await signOut();
 
       token.role = existingUser.role;
 
@@ -51,7 +51,7 @@ export const { auth, handlers, signIn, signOut } = NextAuth({
         return {
           id: credentials.id as string,
           name: credentials.name as string,
-          email: credentials.mail as string,
+          email: credentials.email as string,
           image: credentials.image as string,
         };
       },

@@ -13,6 +13,7 @@ const LoginPage = () => {
 
       //kullanici basarili bir sekilde giris yapmis demektir
       if (res) {
+        console.log(res);
         loginAction(
           res.data.id,
           res.data.name,

@@ -11,7 +11,6 @@ export default auth((req) => {
   const isAuthRoute = authRoutes.includes(nextUrl.pathname);
   //herkese acik olan sayfalar
   const isPublicRoute = publicRoutes.includes(nextUrl.pathname);
-  console.log(nextUrl.pathname, isPublicRoute);
   /* kullanici createname veya error gibi bir sayfada durabilsin diye
    * aksi takdirde otomatik login sayfasına yonlenir */
   if (isAuthRoute) return NextResponse.next();

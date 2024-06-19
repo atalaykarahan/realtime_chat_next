@@ -46,7 +46,12 @@ const CreateNameForm = ({ token }: CreateNameFormProps) => {
         /* kullanici basarili bir sekilde giris yaptiktan sonra
          * backend tarafından donen cookie ile auth.js tarafında giris islemini
          * baslatiyoruz */
-        loginAction();
+        loginAction(
+          res.data.user_id,
+          res.data.user_name,
+          res.data.user_email,
+          res.data.user_photo
+        );
       } else {
         setErrorMessage("Bilinmeyen bir hata oluştu");
       }

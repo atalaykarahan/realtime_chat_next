@@ -10,8 +10,17 @@ import { AuthError } from "next-auth";
  * ancak bu metod sayesinde once giris yapip session olusup daha sonra middleware kontrol edildiginden
  * sorunsuzca chat sayfasina yonlendirilebiliyor.
  */
-export const loginAction = async () => {
+export const loginAction = async (
+  id: string,
+  name: string,
+  email: string,
+  image: string
+) => {
   await signIn("credentials", {
+    id,
+    name,
+    email,
+    image,
     redirectTo: DEFAULT_LOGIN_REDIRECT,
   });
 };

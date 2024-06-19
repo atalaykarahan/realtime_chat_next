@@ -1,6 +1,5 @@
 "use client";
 import { signup } from "@/app/api/services/auth.Service";
-import CustomCard from "@/components/custom-card";
 import FormError from "@/components/form-error";
 import {
   Form,
@@ -61,7 +60,7 @@ const CreateNameForm = ({ token }: CreateNameFormProps) => {
       } else {
         setErrorMessage("Bilinmeyen bir hata oluştu");
       }
-      console.log(error);
+      console.error(error);
     } finally {
       setIsPending(false);
     }
@@ -69,46 +68,42 @@ const CreateNameForm = ({ token }: CreateNameFormProps) => {
 
   return (
     <>
-    
+      <Form {...form}>
+        <form {...form} className="" onSubmit={form.handleSubmit(onSubmit)}>
+          <FormField
+            control={form.control}
+            name="username"
+            render={({ field }) => (
+              <FormItem>
+                <LabelInputContainer className="mb-4">
+                  <FormLabel>
+                    <Label htmlFor="username">Kullanıcı Adı</Label>
+                  </FormLabel>
+                  <FormMessage />
+                  <FormControl>
+                    <AnimationInput
+                      {...field}
+                      id="username"
+                      placeholder="Kullanıcı adı giriniz..."
+                      type="text"
+                      disabled={isPending}
+                    />
+                  </FormControl>
+                </LabelInputContainer>
+              </FormItem>
+            )}
+          />
+          <FormError className="mb-3" message={errorMessage} />
 
-    
-
-    <Form {...form}>
-      <form {...form} className="" onSubmit={form.handleSubmit(onSubmit)}>
-        <FormField
-          control={form.control}
-          name="username"
-          render={({ field }) => (
-            <FormItem>
-              <LabelInputContainer className="mb-4">
-                <FormLabel>
-                  <Label htmlFor="username">Kullanıcı Adı</Label>
-                </FormLabel>
-                <FormMessage />
-                <FormControl>
-                  <AnimationInput
-                    {...field}
-                    id="username"
-                    placeholder="Kullanıcı adı giriniz..."
-                    type="text"
-                    disabled={isPending}
-                  />
-                </FormControl>
-              </LabelInputContainer>
-            </FormItem>
-          )}
-        />
-        <FormError className="mb-3" message={errorMessage} />
-
-        <button
-          disabled={isPending}
-          className="bg-gradient-to-br relative group/btn bg-black w-full text-white rounded-md h-10 font-medium "
-          type="submit"
-        >
-          {isPending ? "Kontrol Ediliyor..." : "Kayıt Ol"}
-        </button>
-      </form>
-    </Form>
+          <button
+            disabled={isPending}
+            className="bg-gradient-to-br relative group/btn bg-black w-full text-white rounded-md h-10 font-medium "
+            type="submit"
+          >
+            {isPending ? "Kontrol Ediliyor..." : "Kayıt Ol"}
+          </button>
+        </form>
+      </Form>
     </>
   );
 };

@@ -1,9 +1,7 @@
 "use server";
 
-import * as z from "zod";
 import { signIn } from "@/auth";
 import { DEFAULT_LOGIN_REDIRECT } from "@/routes";
-import { AuthError } from "next-auth";
 
 /** Bu metodun amaci eger signIn kodunu client side tarafindan cagirirsak
  * user middleware'a takiliyor yani giris yapmis olsa bile giris yapmamis gibi gozukuyor.

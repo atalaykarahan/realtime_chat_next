@@ -11,15 +11,14 @@ import {
 } from "@/components/ui/form";
 import { AnimationInput } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { cn } from "@/lib/utils";
 import { UsernameSchemas } from "@/schemas/username";
 import { zodResolver } from "@hookform/resolvers/zod";
 
 import { loginAction } from "@/actions/login";
+import { LabelInputContainer } from "@/components/label-input-container";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
-import { LabelInputContainer } from "@/components/label-input-container";
 
 interface CreateNameFormProps {
   token: string;

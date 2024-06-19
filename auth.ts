@@ -30,15 +30,10 @@ export const { auth, handlers, signIn, signOut } = NextAuth({
       if (token.role && session.user) {
         session.user.role = token.role;
       }
-
-      console.log("session token: ", token);
-      // console.log(session)
       return session;
     },
     async jwt({ token }) {
       //bu kisimda userin session icinde gozuken role yetkisini ekliyoruz
-      console.log({ token });
-
       if (!token.sub) return token;
 
       const existingUser = await getLoggedInUserServer();

@@ -13,11 +13,12 @@ const LoginPage = () => {
 
       //kullanici basarili bir sekilde giris yapmis demektir
       if (res) {
+        console.log(res);
         loginAction(
-          res.data.user_id,
-          res.data.user_name,
-          res.data.user_email,
-          res.data.user_photo
+          res.data.id,
+          res.data.name,
+          res.data.mail,
+          res.data.photo
         );
       }
     };

@@ -4,16 +4,17 @@ import ChatMessage from "./chat-message";
 import ChatNavbar from "./chat-navbar";
 import UserProfile from "./user-profile";
 import {auth} from "@/auth"
+import { currentUser } from "@/lib/auth";
 const ChatPage = async () => {
-  const session = await auth();
+  const user = await currentUser();
   return (
     <div
-      className="h-screen w-screen p-6 flex gap-5 relative bg-white"
+      className="h-screen w-screen p-6 flex gap-5 relative"
       style={{ zIndex: "1" }}
     >
-      {JSON.stringify(session)}
+      {/* {JSON.stringify(session)} */}
       <CustomCard className="hidden lg:block flex-none min-w-[260px]">
-        <UserProfile />
+        <UserProfile user={user} />
         <div className="pt-3">
           <DummyData />
           <DummyData />

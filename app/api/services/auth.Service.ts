@@ -37,3 +37,7 @@ export const getLoggedInUserServer = async () => {
   return response;
 };
 
+export const getLoggedInUser = async () => {
+  return await axios.get("/auth");
+}
+

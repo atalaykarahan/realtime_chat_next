@@ -1,27 +1,17 @@
-"use client";
 import CustomCard from "@/components/custom-card";
-import { Card } from "@/components/ui/card";
-import ChatNavbar from "./chat-navbar";
 import DummyData from "@/components/ui/dummy";
 import ChatMessage from "./chat-message";
+import ChatNavbar from "./chat-navbar";
 import UserProfile from "./user-profile";
-import { useEffect } from "react";
-import router from "next/router";
-const HomePage = () => {
-  useEffect(() =>{
-    console.log("atalay")
-    // const { token } = router.query;
-    // console.log(token)
-    // if (token) {
-    //   // localStorage.setItem('jwt', token);
-    //   router.push('/dashboard');
-    // }
-  },[]);
+import {auth} from "@/auth"
+const HomePage = async () => {
+  const session = await auth();
   return (
     <div
-      className="h-screen w-screen p-6 flex gap-5 relative"
+      className="h-screen w-screen p-6 flex gap-5 relative bg-white"
       style={{ zIndex: "1" }}
     >
+      {JSON.stringify(session)}
       <CustomCard className="hidden lg:block flex-none min-w-[260px]">
         <UserProfile />
         <div className="pt-3">

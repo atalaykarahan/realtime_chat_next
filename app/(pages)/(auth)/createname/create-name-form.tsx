@@ -14,11 +14,12 @@ import { Label } from "@/components/ui/label";
 import { cn } from "@/lib/utils";
 import { UsernameSchemas } from "@/schemas/username";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useRouter } from "next/navigation";
 
-import { useState, useTransition } from "react";
+import { loginAction } from "@/actions/login";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
+import { LabelInputContainer } from "@/components/label-input-container";
 
 interface CreateNameFormProps {
   token: string;
@@ -27,7 +28,6 @@ interface CreateNameFormProps {
 const CreateNameForm = ({ token }: CreateNameFormProps) => {
   const [isPending, setIsPending] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
-  const router = useRouter();
 
   //#region FORM SCHEMA SETTINGS
   const form = useForm<z.infer<typeof UsernameSchemas>>({
@@ -43,7 +43,10 @@ const CreateNameForm = ({ token }: CreateNameFormProps) => {
     try {
       const res = await signup(token, values.username);
       if (res.status === 201) {
-        router.push("/chat");
+        /* kullanici basarili bir sekilde giris yaptiktan sonra
+         * backend tarafından donen cookie ile auth.js tarafında giris islemini
+         * baslatiyoruz */
+        loginAction();
       } else {
         setErrorMessage("Bilinmeyen bir hata oluştu");
       }
@@ -100,17 +103,3 @@ const CreateNameForm = ({ token }: CreateNameFormProps) => {
 };
 
 export default CreateNameForm;
-
-const LabelInputContainer = ({
-  children,
-  className,
-}: {
-  children: React.ReactNode;
-  className?: string;
-}) => {
-  return (
-    <div className={cn("flex flex-col space-y-2 w-full", className)}>
-      {children}
-    </div>
-  );
-};

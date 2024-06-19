@@ -4,7 +4,7 @@ import ChatMessage from "./chat-message";
 import ChatNavbar from "./chat-navbar";
 import UserProfile from "./user-profile";
 import {auth} from "@/auth"
-const HomePage = async () => {
+const ChatPage = async () => {
   const session = await auth();
   return (
     <div
@@ -38,4 +38,4 @@ const HomePage = async () => {
   );
 };
 
-export default HomePage;
+export default ChatPage;

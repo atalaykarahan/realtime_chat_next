@@ -1,6 +1,6 @@
 import { BackgroundBeams } from "@/components/ui/background-beams";
 
-const CreateNameLayout = ({ children }: { children: React.ReactNode }) => {
+const AuthLayout = ({ children }: { children: React.ReactNode }) => {
   return (
     <div className="flex items-center justify-center min-h-screen">
       <BackgroundBeams />
@@ -9,4 +9,4 @@ const CreateNameLayout = ({ children }: { children: React.ReactNode }) => {
   );
 };
 
-export default CreateNameLayout;
+export default AuthLayout;

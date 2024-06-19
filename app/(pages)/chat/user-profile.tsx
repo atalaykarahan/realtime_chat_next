@@ -3,7 +3,9 @@ import { Input } from "@/components/ui/input";
 import Image from "next/image";
 import { PiDotsThreeCircleLight } from "react-icons/pi";
 import { Search } from "@/components/ui/search";
-export default function UserProfile() {
+import { ExtendedUser } from "@/auth";
+
+const UserProfile = ({user}: any) => {
   return (
     <>
       <div className="px-3 py-5 border-b border-[#5C6B81]">
@@ -15,7 +17,7 @@ export default function UserProfile() {
                   width={40}
                   height={40}
                   className="aspect-square h-full w-full"
-                  src="https://dash-tail.vercel.app/_next/static/media/avatar-2.1136fd53.jpg"
+                  src={user.image ?? "https://dash-tail.vercel.app/_next/static/media/avatar-2.1136fd53.jpg"}
                   alt="tst"
                 />
               </span>
@@ -25,7 +27,7 @@ export default function UserProfile() {
               <div className="truncate max-w-[120px]">
                 <span className="text-sm  text-white font-medium">
                   {" "}
-                  Felecia Rower
+                  {user.name}
                 </span>
               </div>
               <div className="truncate  max-w-[120px]">
@@ -44,3 +46,5 @@ export default function UserProfile() {
     </>
   );
 }
+
+export default UserProfile;

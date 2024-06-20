@@ -46,53 +46,23 @@ const Dropdown = () => {
         <PiDotsThreeCircleLight className="text-[#4A32B0] text-[2rem]" />
       </DropdownMenuTrigger>
       <DropdownMenuContent>
-        <DropdownMenuLabel>My Account</DropdownMenuLabel>
+        <DropdownMenuLabel>Hesabım</DropdownMenuLabel>
         <DropdownMenuSeparator />
         <DropdownMenuItem>
           <User className="mr-2 h-4 w-4" />
-          Profile
-        </DropdownMenuItem>
-
-        <DropdownMenuItem>
-          <CreditCard className="mr-2 h-4 w-4" />
-          <span>Billing</span>
-        </DropdownMenuItem>
-
-        <DropdownMenuItem>
-          <Gem className="mr-2 h-4 w-4 text-blue-700" />
-          <span>Premium</span>
+          Profil
         </DropdownMenuItem>
 
         <DropdownMenuItem>
           <UserRoundPlus className="mr-2 h-4 w-4" />
-          Add Friends
+          Arkadaş Ekle
         </DropdownMenuItem>
 
         <DropdownMenuSeparator />
-        <DropdownMenuSub>
-          <DropdownMenuSubTrigger>
-            {/* dinamik */}
-            <CircleCheck className="mr-2 h-4 w-4 text-green-700" />
-            <span>Status</span>
-          </DropdownMenuSubTrigger>
-          <DropdownMenuPortal>
-            <DropdownMenuSubContent>
-              <DropdownMenuItem>
-                <CircleCheck className="mr-2 h-4 w-4 text-green-700" />
 
-                <span>Active</span>
-              </DropdownMenuItem>
-              <DropdownMenuItem>
-                <CircleMinus className="mr-2 h-4 w-4 text-rose-700" />
-                <span>Busy</span>
-              </DropdownMenuItem>
-            </DropdownMenuSubContent>
-          </DropdownMenuPortal>
-        </DropdownMenuSub>
-        <DropdownMenuSeparator />
         <DropdownMenuItem onClick={handleLogout}>
           <LogOut className="mr-2 h-4 w-4 text-rose-700" />
-          <span>Logout</span>
+          <span>Çıkış Yap</span>
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>

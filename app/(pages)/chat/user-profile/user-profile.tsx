@@ -22,7 +22,11 @@ const UserProfile = ({ user }: any) => {
                 alt="tst"
               />
             </span>
-            <div className="inline-flex rounded-full border text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 bg-success border-transparent text-success-foreground h-2 w-2 p-0 ring-1 ring-border ring-offset-[1px] items-center justify-center absolute left-[calc(100%-8px)] top-[calc(100%-10px)]"></div>
+            {/* if user online */}
+            <span className="inline-flex rounded-full h-2 w-2 p-0 ring-1 ring-border ring-green-500 items-center justify-center absolute left-[calc(100%-8px)] top-[calc(100%-10px)] bg-green-500" />
+
+            {/* if user offline */}
+            {/* <span className="inline-flex rounded-full h-2 w-2 p-0 ring-1 ring-border ring-offset-[1px] items-center justify-center absolute left-[calc(100%-8px)] top-[calc(100%-10px)]" /> */}
           </div>
           <div className="block">
             <div className="truncate max-w-[120px]">
@@ -32,7 +36,7 @@ const UserProfile = ({ user }: any) => {
               </span>
             </div>
             <div className="truncate  max-w-[120px]">
-              <span className=" text-sm  text-[#5C6B81] ">Active Now</span>
+              <span className=" text-sm  text-[#5C6B81] ">Çevrimiçi</span>
             </div>
           </div>
         </div>
@@ -41,7 +45,7 @@ const UserProfile = ({ user }: any) => {
         </div>
       </div>
       <div className="pt-5">
-        <Search placeholder="Search by name" />
+        <Search placeholder="İsim'e göre ara" />
       </div>
     </div>
   );

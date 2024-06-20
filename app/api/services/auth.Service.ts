@@ -1,42 +1,25 @@
+import { getMyCookie } from "@/hooks/get-my-cookie";
 import axios from "../axios";
-import { cookies } from "next/dist/client/components/headers";
 
-/* Cookies kismindan back-end tarafindan
- * bize getirilen cookiyi alır */
-export const getMyCookie = () => {
-  try {
-    const cStore = cookies();
-    const cookees = cStore.get("connect.sid");
-    const readable = cookees?.name + "=" + cookees?.value;
-    return readable;
-  } catch (error) {
-    return { error: "Cookie bulunamadı!" };
-  }
-};
-
+// kayit olmak icin
 export const signup = async (token: string, username: string) => {
   return await axios.post(
-    `/auth/signup`,
+    "/auth/signup",
     { username: username },
     {
       headers: {
         Authorization: token,
       },
-      withCredentials: true
     }
   );
 };
 
-export const logout = async () => {
-  return await axios.post(
-    `/auth/logout`,
-    null,
-    {
-      withCredentials:true
-    }
-  )
-}
+export const logout = () => {
+  return axios.post("/auth/logout");
+};
 
+//#region CHECK VALID SESSION
+// for server side | check for user valid session
 export const getLoggedInUserServer = async () => {
   const query = await fetch(`${process.env.BASE_URL}/auth`, {
     headers: {
@@ -47,7 +30,8 @@ export const getLoggedInUserServer = async () => {
   return response;
 };
 
-export const getLoggedInUser = async () => {
+// for client side | check for user valid session
+export const getLoggedInUser = async () => {
   return await axios.get("/auth");
-}
-
+};
+//#endregion

@@ -33,14 +33,17 @@ export const { auth, handlers, signIn, signOut } = NextAuth({
       return session;
     },
     async jwt({ token }) {
+      /** burda yazan yetkilendirme kodu kullanici her bir sayfa
+       * degistirdiginde tetikleniyor surekli olarak guncel yetkisini cekiyor yani
+       */
+
       //bu kisimda userin session icinde gozuken role yetkisini ekliyoruz
       if (!token.sub) return token;
 
       const existingUser = await getLoggedInUserServer();
-      if (existingUser.error) await signOut();
+      if (existingUser.error) return token;
 
       token.role = existingUser.role;
-
       return token;
     },
   },

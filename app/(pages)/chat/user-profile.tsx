@@ -4,8 +4,54 @@ import Image from "next/image";
 import { PiDotsThreeCircleLight } from "react-icons/pi";
 import { Search } from "@/components/ui/search";
 import { ExtendedUser } from "@/auth";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuPortal,
+  DropdownMenuRadioGroup,
+  DropdownMenuRadioItem,
+  DropdownMenuSeparator,
+  DropdownMenuSub,
+  DropdownMenuSubContent,
+  DropdownMenuSubTrigger,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import { useState } from "react";
+import { useToast } from "@/components/ui/use-toast"
 
-const UserProfile = ({user}: any) => {
+import {
+  UserRoundPlus,
+  User,
+  CreditCard,
+  Gem,
+  CircleMinus,
+  CircleCheck,
+  LogOut,
+} from "lucide-react";
+import { logout } from "@/app/api/services/auth.Service";
+
+
+const UserProfile = ({ user }: any) => {
+  const { toast } = useToast()
+
+  const handleLogout = async () => {
+    try {
+      const res = await logout();
+      if (res.status === 200 ) {
+        window.location.href = "/";
+      }
+    } catch (error: any) {
+      console.error(error);
+      toast({
+        variant: "destructive",
+        title: "Uh oh! Something went wrong.",
+        description: "There was a problem with your request.",
+      })
+    }
+  };
+
   return (
     <>
       <div className="px-3 py-5 border-b border-[#5C6B81]">
@@ -17,7 +63,10 @@ const UserProfile = ({user}: any) => {
                   width={40}
                   height={40}
                   className="aspect-square h-full w-full"
-                  src={user.image ?? "https://dash-tail.vercel.app/_next/static/media/avatar-2.1136fd53.jpg"}
+                  src={
+                    user.image ??
+                    "https://dash-tail.vercel.app/_next/static/media/avatar-2.1136fd53.jpg"
+                  }
                   alt="tst"
                 />
               </span>
@@ -36,15 +85,69 @@ const UserProfile = ({user}: any) => {
             </div>
           </div>
           <div className="flex items-center gap-2">
-            <PiDotsThreeCircleLight className="text-[#4A32B0] text-[2rem]"/>
+            <DropdownMenu>
+              <DropdownMenuTrigger>
+                <PiDotsThreeCircleLight className="text-[#4A32B0] text-[2rem]" />
+              </DropdownMenuTrigger>
+              <DropdownMenuContent>
+                <DropdownMenuLabel>My Account</DropdownMenuLabel>
+                <DropdownMenuSeparator />
+                <DropdownMenuItem>
+                  <User className="mr-2 h-4 w-4" />
+                  Profile
+                </DropdownMenuItem>
+
+                <DropdownMenuItem>
+                  <CreditCard className="mr-2 h-4 w-4" />
+                  <span>Billing</span>
+                </DropdownMenuItem>
+
+                <DropdownMenuItem>
+                  <Gem className="mr-2 h-4 w-4 text-blue-700" />
+                  <span>Premium</span>
+                </DropdownMenuItem>
+
+                <DropdownMenuItem>
+                  <UserRoundPlus className="mr-2 h-4 w-4" />
+                  Add Friends
+                </DropdownMenuItem>
+
+                <DropdownMenuSeparator />
+                <DropdownMenuSub>
+                  <DropdownMenuSubTrigger>
+                    {/* dinamik */}
+                    <CircleCheck className="mr-2 h-4 w-4 text-green-700" />
+                    <span>Status</span>
+                  </DropdownMenuSubTrigger>
+                  <DropdownMenuPortal>
+                    <DropdownMenuSubContent>
+                      <DropdownMenuItem>
+                        <CircleCheck className="mr-2 h-4 w-4 text-green-700" />
+
+                        <span>Active</span>
+                      </DropdownMenuItem>
+                      <DropdownMenuItem>
+                        <CircleMinus className="mr-2 h-4 w-4 text-rose-700" />
+                        <span>Busy</span>
+                      </DropdownMenuItem>
+                    </DropdownMenuSubContent>
+                  </DropdownMenuPortal>
+                </DropdownMenuSub>
+                <DropdownMenuSeparator />
+                <DropdownMenuItem onClick={handleLogout}>
+                  <LogOut className="mr-2 h-4 w-4 text-rose-700" />
+                  <span>Logout</span>
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
           </div>
         </div>
         <div className="pt-5">
-          <Search placeholder="Search by name"/>
+          <Search placeholder="Search by name" />
         </div>
       </div>
     </>
   );
-}
+};
 
 export default UserProfile;

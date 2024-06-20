@@ -50,13 +50,17 @@ const config = {
           foreground: "hsl(var(--accent-foreground))",
         },
         popover: {
-          DEFAULT: "hsl(var(--popover))",
-          foreground: "hsl(var(--popover-foreground))",
+          DEFAULT: "hsl(var(--primary))",
+          foreground: "hsl(var(--primary-foreground))",
         },
         card: {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
+        darktheme: {
+          DEFAULT: "#4A32B0/40",
+          foreground: "hsl(var(--primary-foreground))",
+        }
       },
       borderRadius: {
         lg: "var(--radius)",

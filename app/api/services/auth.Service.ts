@@ -27,6 +27,16 @@ export const signup = async (token: string, username: string) => {
   );
 };
 
+export const logout = async () => {
+  return await axios.post(
+    `/auth/logout`,
+    null,
+    {
+      withCredentials:true
+    }
+  )
+}
+
 export const getLoggedInUserServer = async () => {
   const query = await fetch(`${process.env.BASE_URL}/auth`, {
     headers: {

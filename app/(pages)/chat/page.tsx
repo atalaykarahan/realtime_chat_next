@@ -2,7 +2,7 @@ import CustomCard from "@/components/custom-card";
 import DummyData from "@/components/ui/dummy";
 import ChatMessage from "./chat-message";
 import ChatNavbar from "./chat-navbar";
-import UserProfile from "./user-profile";
+import UserProfile from "./user-profile/user-profile";
 import {auth} from "@/auth"
 import { currentUser } from "@/lib/auth";
 const ChatPage = async () => {

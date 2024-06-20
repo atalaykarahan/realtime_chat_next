@@ -1,35 +1,26 @@
 "use client";
+import { logout } from "@/app/api/services/auth.Service";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuLabel,
-  DropdownMenuPortal,
   DropdownMenuSeparator,
-  DropdownMenuSub,
-  DropdownMenuSubContent,
-  DropdownMenuSubTrigger,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { LogOut, User, UserRoundPlus } from "lucide-react";
 import { PiDotsThreeCircleLight } from "react-icons/pi";
-import {
-  CircleCheck,
-  CircleMinus,
-  CreditCard,
-  Gem,
-  LogOut,
-  User,
-  UserRoundPlus,
-} from "lucide-react";
-import { logout } from "@/app/api/services/auth.Service";
 import { toast } from "sonner";
+import { signOut } from "next-auth/react";
 
 const Dropdown = () => {
   const handleLogout = async () => {
     try {
       const res = await logout();
+      console.log(res);
       if (res.status === 200) {
-        window.location.href = "/";
+        toast.success("Çıkış yaptı");
+        await signOut();
       }
     } catch (error: any) {
       toast.error("Bir şeyler ters gitti.", {

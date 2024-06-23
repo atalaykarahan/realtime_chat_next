@@ -3,8 +3,25 @@ import { Disclosure } from "@headlessui/react";
 import { LuPlusCircle } from "react-icons/lu";
 import { Input } from "@/components/ui/input";
 import { AiOutlineSend } from "react-icons/ai";
+import io, { Socket } from "socket.io-client";
+import { useEffect, useState } from "react";
 
 export default function ChatMessage() {
+
+  const [socket, setSocket] = useState<Socket | null>(null);
+
+  useEffect(() => {
+    const newSocket = io("http://localhost:9000", {
+      transports: ["websocket", "polling"],
+    });
+    setSocket(newSocket);
+
+    return () => {
+      if (newSocket) newSocket.close();
+    };
+  }, []);
+
+
   return (
     <Disclosure as="nav" className="border-t border-[#5C6B81]">
       {({ open }) => (

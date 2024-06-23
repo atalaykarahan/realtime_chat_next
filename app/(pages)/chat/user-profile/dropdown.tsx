@@ -1,5 +1,4 @@
 "use client";
-import { logout } from "@/app/api/services/auth.Service";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -12,23 +11,31 @@ import { LogOut, User, UserRoundPlus } from "lucide-react";
 import { PiDotsThreeCircleLight } from "react-icons/pi";
 import { toast } from "sonner";
 import { signOut } from "next-auth/react";
+import { logoutAction } from "@/actions/logout";
 
 const Dropdown = () => {
   const handleLogout = async () => {
-    try {
-      const res = await logout();
-      console.log(res);
-      if (res.status === 200) {
-        toast.success("Çıkış yaptı");
-        await signOut();
-      }
-    } catch (error: any) {
-      toast.error("Bir şeyler ters gitti.", {
-        description: "Çıkış yapma işlemi ile ilgili bir hata oluştu",
-        duration: 3000,
-      });
-      console.error(error);
-    }
+    /** burdaki yorum satirlari bilerek birakildi hata mesaji islemek icin eger hata gelirse onceki
+     * uyari ile ayni uyariyi vermek icin
+     */
+
+    logoutAction().then((data) => {
+      console.log(data);
+      // if (data && data.error) {
+      //   // data varsa ve içinde error varsa, hata mesajını set et
+      //   setErrorMessage(data.error);
+      // }
+    });
+    // try {
+    //   const res = await logoutAction();
+    //   console.log(res);
+    // } catch (error: any) {
+    //   toast.error("Bir şeyler ters gitti.", {
+    //     description: "Çıkış yapma işlemi ile ilgili bir hata oluştu",
+    //     duration: 3000,
+    //   });
+    //   console.error(error);
+    // }
   };
 
   return (

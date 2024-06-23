@@ -14,8 +14,20 @@ export const signup = async (token: string, username: string) => {
   );
 };
 
-export const logout = () => {
-  return axios.post("/auth/logout");
+// logout server side
+export const logoutServer = async () => {
+  const query = await fetch(`${process.env.BASE_URL}/auth/logout`, {
+    method: "POST",
+    headers: {
+      Cookie: `${getMyCookie()}`,
+    },
+  });
+  const response = {
+    status: query.status,
+    statusText: query.statusText,
+    headers: query.headers,
+  };
+  return response;
 };
 
 //#region CHECK VALID SESSION

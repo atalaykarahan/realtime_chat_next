@@ -7,20 +7,28 @@ import io, { Socket } from "socket.io-client";
 import { useEffect, useState } from "react";
 
 export default function ChatMessage() {
-
-  const [socket, setSocket] = useState<Socket | null>(null);
+  // const [socket, setSocket] = useState<Socket | null>(null);
+  // const [connectionStatus, setConnectionStatus] =
+  //   useState<string>("Connecting...");
 
   useEffect(() => {
-    const newSocket = io("http://localhost:9000", {
-      transports: ["websocket", "polling"],
-    });
-    setSocket(newSocket);
-
-    return () => {
-      if (newSocket) newSocket.close();
-    };
+    // const newSocket = io("http://localhost:9898/chat", {
+    //   transports: ["websocket", "polling"],
+    // });
+    // newSocket.on("connect", () => {
+    //   setConnectionStatus("Connected");
+    // });
+    // newSocket.on("disconnect", () => {
+    //   setConnectionStatus("Disconnected");
+    // });
+    // newSocket.on("connect_error", (error) => {
+    //   setConnectionStatus(`Connection Error: ${error.message}`);
+    // });
+    // setSocket(newSocket);
+    // return () => {
+    //   if (newSocket) newSocket.close();
+    // };
   }, []);
-
 
   return (
     <Disclosure as="nav" className="border-t border-[#5C6B81]">
@@ -32,7 +40,7 @@ export default function ChatMessage() {
                 <LuPlusCircle className="text-[#4A32B0] text-[2rem]" />
               </div>
               <div className="w-full">
-                <Input  type="text" placeholder="Type your message..." />
+                <Input type="text" placeholder="Type your message..." />
               </div>
               <div>
                 <AiOutlineSend className="text-[#4A32B0] text-[2rem]" />

@@ -2,6 +2,7 @@ import NextAuth, { DefaultSession } from "next-auth";
 
 import Credentials from "next-auth/providers/credentials";
 import { getLoggedInUserServer } from "./app/api/services/auth.Service";
+import { cookies } from "next/dist/client/components/headers";
 
 /** bu metodun amaci user.role kismi boyle bir alan yok
  * hatasi veriyor bunun onune gecmek icin yazildi */
@@ -41,7 +42,10 @@ export const { auth, handlers, signIn, signOut } = NextAuth({
       if (!token.sub) return token;
 
       const existingUser = await getLoggedInUserServer();
-      if (existingUser.error) await signOut();
+      if (!existingUser.role) {
+        cookies().delete(process.env.SESSION_COOKIE_NAME || "connect.sid");
+        await signOut();
+      }
 
       token.role = existingUser.role;
       return token;

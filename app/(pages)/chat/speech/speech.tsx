@@ -1,8 +1,4 @@
-import { Button } from "@/components/ui/button";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import { User } from "next-auth";
-import Image from "next/image";
-import { PiDotsThreeCircleVerticalFill } from "react-icons/pi";
 import LeftBuble from "./left-buble";
 import RightBuble from "./right-buble";
 
@@ -12,12 +8,30 @@ interface SpeechProps {
 
 const Speech: React.FC<SpeechProps> = ({ user }) => {
   return (
-    <div className="mt-2">
-      <ScrollArea className="h-full">
-        {/* left */}
-        <LeftBuble user={user} />
-        {/* right */}
-        <RightBuble user={user} />
+    <div className="mt-3 p-6 pt-0 relative flex-1 overflow-y-auto">
+      <ScrollArea>
+        <LeftBuble user={user} group={true} message="test deneme lorem ipsum" />
+        <RightBuble
+          user={user}
+          group={true}
+          message="Lorem, ipsum dolor sit amet consectetur adipisicing elit. Asperiores magnam explicabo cupiditate laudantium vitae quae, quidem beatae! Dolores eaque natus magni, sequi temporibus quisquam. Quo vitae voluptas atque magni obcaecati. Lorem, ipsum dolor sit amet consectetur adipisicing elit. Asperiores magnam explicabo cupiditate laudantium vitae quae, quidem beatae! Dolores eaque natus magni, sequi temporibus quisquam. Quo vitae voluptas atque magni obcaecati. Lorem, ipsum dolor sit amet consectetur adipisicing elit. Asperiores magnam explicabo cupiditate laudantium vitae quae, quidem beatae! Dolores eaque natus magni, sequi temporibus quisquam. Quo vitae voluptas atque magni obcaecati. Lorem, ipsum dolor sit amet consectetur adipisicing elit. Asperiores magnam explicabo cupiditate laudantium vitae quae, quidem beatae! Dolores eaque natus magni, sequi temporibus quisquam. Quo vitae voluptas atque magni obcaecati."
+        />
+        <LeftBuble
+          user={user}
+          group={true}
+          message="bu kadar uzun mesaj mı yazılır aw"
+        />
+        <LeftBuble
+          user={user}
+          group={true}
+          message="Kısa kısa yaz benim gibi."
+        />
+        <LeftBuble
+          user={user}
+          group={true}
+          message="ve noktalama işaretlerine uy amk"
+        />
+        <RightBuble user={user} group={true} message="Tabi Efendim." />
       </ScrollArea>
     </div>
   );

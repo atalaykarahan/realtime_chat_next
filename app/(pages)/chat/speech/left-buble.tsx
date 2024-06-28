@@ -4,31 +4,39 @@ import { PiDotsThreeCircleVerticalFill } from "react-icons/pi";
 
 interface LeftBubleProps {
   user: any;
+  group?: boolean;
+  message: string;
 }
 
-const LeftBuble: React.FC<LeftBubleProps> = ({ user }) => {
+const LeftBuble: React.FC<LeftBubleProps> = ({ user, group, message }) => {
   return (
     <div className="block md:px-6 px-4 ">
       <div className="flex space-x-2 items-start group rtl:space-x-reverse mb-4">
-        <div className="flex-none self-end -translate-y-5">
-          <div className="h-8 w-8 rounded-full">
-            <Image
-              width={40}
-              height={40}
-              src={user?.image}
-              alt="/images/avatar/avatar-1.jpg"
-              className="block w-full h-full object-cover rounded-full"
-            />
+        {/* profile photo */}
+        {group && (
+          <div className="flex-none self-end -translate-y-5">
+            <div className="h-8 w-8 rounded-full">
+              <Image
+                width={40}
+                height={40}
+                src={user?.image}
+                alt="/images/avatar/avatar-1.jpg"
+                className="block w-full h-full object-cover rounded-full"
+              />
+            </div>
           </div>
-        </div>
+        )}
+
+        {/* chat bubble */}
         <div className="flex-1 flex flex-col gap-2">
           <div className="flex flex-col   gap-1">
             <div className="flex items-center gap-1">
               <div className="whitespace-pre-wrap break-all relative z-[1]">
                 <div className="bg-cyan-600  text-sm  py-2 px-3 rounded-2xl  flex-1  ">
-                  Hello. How can I help You?
+                  {message}
                 </div>
               </div>
+              {/* option button */}
               <div className="opacity-0 invisible group-hover:opacity-100 group-hover:visible flex">
                 <Button
                   type="button"
@@ -39,7 +47,8 @@ const LeftBuble: React.FC<LeftBubleProps> = ({ user }) => {
                 </Button>
               </div>
             </div>
-            <span className="text-xs   text-red-500">01:45 PM</span>
+            {/* text time */}
+            <span className="text-xs text-red-500">19:48</span>
           </div>
         </div>
       </div>

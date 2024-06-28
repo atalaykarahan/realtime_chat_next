@@ -4,7 +4,7 @@ import CustomCard from "@/components/custom-card";
 import { useCurrentUser } from "@/hooks/use-current-user";
 import { useEffect, useState } from "react";
 import io, { Socket } from "socket.io-client";
-import ChatMessage from "./chat-message";
+import ChatMessage from "./type-message";
 import ChatNavbar from "./chat-navbar";
 
 import Sidebar from "./sidebar/sidebar";

@@ -2,13 +2,13 @@ import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import { PiDotsThreeCircleVerticalFill } from "react-icons/pi";
 
-interface LeftBubleProps {
+interface LeftBubbleProps {
   user: any;
   group?: boolean;
   message: string;
 }
 
-const LeftBuble: React.FC<LeftBubleProps> = ({ user, group, message }) => {
+const LeftBubble: React.FC<LeftBubbleProps> = ({ user, group, message }) => {
   return (
     <div className="block md:px-6 px-4 ">
       <div className="flex space-x-2 items-start group rtl:space-x-reverse mb-4">
@@ -56,4 +56,4 @@ const LeftBuble: React.FC<LeftBubleProps> = ({ user, group, message }) => {
   );
 };
 
-export default LeftBuble;
+export default LeftBubble;

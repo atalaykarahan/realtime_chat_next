@@ -1,13 +1,13 @@
 import Image from "next/image";
 import { PiDotsThreeCircleVerticalFill } from "react-icons/pi";
 
-interface RightBubleProps {
+interface RightBubbleProps {
   user: any;
   group?: boolean;
   message: string;
 }
 
-const RightBuble: React.FC<RightBubleProps> = ({ user, group, message }) => {
+const RightBubble: React.FC<RightBubbleProps> = ({ user, group, message }) => {
   return (
     <div className="block md:px-6 px-4 ">
       <div className="flex space-x-2 items-start justify-end group w-full rtl:space-x-reverse mb-4">
@@ -50,4 +50,4 @@ const RightBuble: React.FC<RightBubleProps> = ({ user, group, message }) => {
   );
 };
 
-export default RightBuble;
+export default RightBubble;

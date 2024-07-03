@@ -9,7 +9,7 @@ interface SpeechProps {
 const Speech: React.FC<SpeechProps> = ({ user }) => {
   return (
     <div className="mt-3 p-6 pt-0 relative flex-1 overflow-y-auto">
-      <ScrollArea>
+      <ScrollArea>s
         <LeftBuble user={user} group={true} message="test deneme lorem ipsum" />
         <RightBuble
           user={user}

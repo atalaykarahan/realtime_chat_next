@@ -1,5 +1,6 @@
 import Image from "next/image";
-import { PiDotsThreeCircleVerticalFill } from "react-icons/pi";
+import { PiDotsThreeCircleVertical } from "react-icons/pi";
+
 
 interface RightBubbleProps {
   user: any;
@@ -10,8 +11,8 @@ interface RightBubbleProps {
 const RightBubble: React.FC<RightBubbleProps> = ({ user, group, message }) => {
   return (
     <div className="block md:px-6 px-4 ">
-      <div className="flex space-x-2 items-start justify-end group w-full rtl:space-x-reverse mb-4">
-        <div className=" flex flex-col  gap-1">
+      <div className="flex space-x-2 items-start  justify-end group w-full rtl:space-x-reverse mb-4">
+        <div className=" flex flex-col max-w-[40%]  gap-1">
           <div className="flex items-center gap-1">
             <div className="opacity-0 invisible group-hover:opacity-100 group-hover:visible ">
               <span
@@ -21,16 +22,16 @@ const RightBubble: React.FC<RightBubbleProps> = ({ user, group, message }) => {
                 aria-expanded="false"
                 data-state="closed"
               >
-                <PiDotsThreeCircleVerticalFill className="w-12 h-12 text-purple-600" />
+                <PiDotsThreeCircleVertical className="w-12 h-12 text-[#4A32B0]" />
               </span>
             </div>
             <div className="whitespace-pre-wrap break-all">
-              <div className="bg-lime-400 text-primary-foreground  text-sm  py-2 px-3 rounded-2xl  flex-1  ">
+              <div className="bg-[#134e4a] text-primary-foreground  text-sm  py-2 px-3 rounded-2xl  flex-1  ">
                 {message}
               </div>
             </div>
           </div>
-          <span className="text-xs text-end text-red-500">01:46 PM</span>
+          <span className="text-xs text-end text-[#e0f2fe]">19:48</span>
         </div>
         {group && (
           <div className="flex-none self-end -translate-y-5">

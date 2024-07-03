@@ -8,8 +8,10 @@ interface SpeechProps {
 
 const Speech: React.FC<SpeechProps> = ({ user }) => {
   return (
-    <div className="mt-3 p-6 pt-0 relative flex-1 overflow-y-auto">
-      <ScrollArea>s
+    <ScrollArea className="rounded-md">
+    <div className=" mt-3 p-6 pt-0 relative flex-1 overflow-y-auto ">
+      
+        {/* buradaki scroll area ne ise yariyor silince hic bir sey degismiyor */}
         <LeftBuble user={user} group={true} message="test deneme lorem ipsum" />
         <RightBuble
           user={user}
@@ -19,21 +21,11 @@ const Speech: React.FC<SpeechProps> = ({ user }) => {
         <LeftBuble
           user={user}
           group={true}
-          message="bu kadar uzun mesaj mı yazılır aw"
+          message="Lorem, ipsum dolor sit amet consectetur adipisicing elit. Asperiores magnam explicabo cupiditate laudantium vitae quae, quidem beatae! Dolores eaque natus magni, sequi temporibus quisquam. Quo vitae voluptas atque magni obcaecati. Lorem, ipsum dolor sit amet consectetur adipisicing elit. Asperiores magnam explicabo cupiditate laudantium vitae quae, quidem beatae! Dolores eaque natus magni, sequi temporibus quisquam. Quo vitae voluptas atque magni obcaecati. Lorem, ipsum dolor sit amet consectetur adipisicing elit. Asperiores magnam explicabo cupiditate laudantium vitae quae, quidem beatae! Dolores eaque natus magni, sequi temporibus quisquam. Quo vitae voluptas atque magni obcaecati. Lorem, ipsum dolor sit amet consectetur adipisicing elit. Asperiores magnam explicabo cupiditate laudantium vitae quae, quidem beatae! Dolores eaque natus magni, sequi temporibus quisquam. Quo vitae voluptas atque magni obcaecati."
         />
-        <LeftBuble
-          user={user}
-          group={true}
-          message="Kısa kısa yaz benim gibi."
-        />
-        <LeftBuble
-          user={user}
-          group={true}
-          message="ve noktalama işaretlerine uy amk"
-        />
-        <RightBuble user={user} group={true} message="Tabi Efendim." />
-      </ScrollArea>
+      
     </div>
+    </ScrollArea>
   );
 };
 

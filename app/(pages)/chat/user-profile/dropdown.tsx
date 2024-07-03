@@ -40,8 +40,8 @@ const Dropdown = () => {
 
   return (
     <DropdownMenu>
-      <DropdownMenuTrigger>
-        <PiDotsThreeCircleLight className="text-[#4A32B0] text-[2rem]" />
+      <DropdownMenuTrigger className="outline-none	">
+        <PiDotsThreeCircleLight className="text-[#4A32B0] text-[2rem]	" />
       </DropdownMenuTrigger>
       <DropdownMenuContent>
         <DropdownMenuLabel>Hesabım</DropdownMenuLabel>

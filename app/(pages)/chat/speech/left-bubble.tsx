@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
-import { PiDotsThreeCircleVerticalFill } from "react-icons/pi";
+import { PiDotsThreeCircleVertical } from "react-icons/pi";
 
 interface LeftBubbleProps {
   user: any;
@@ -29,10 +29,10 @@ const LeftBubble: React.FC<LeftBubbleProps> = ({ user, group, message }) => {
 
         {/* chat bubble */}
         <div className="flex-1 flex flex-col gap-2">
-          <div className="flex flex-col   gap-1">
+          <div className="flex flex-col max-w-[40%]   gap-1">
             <div className="flex items-center gap-1">
               <div className="whitespace-pre-wrap break-all relative z-[1]">
-                <div className="bg-cyan-600  text-sm  py-2 px-3 rounded-2xl  flex-1  ">
+                <div className="bg-[#1f2937] text-white  text-sm  py-2 px-3 rounded-2xl  flex-1  ">
                   {message}
                 </div>
               </div>
@@ -43,12 +43,12 @@ const LeftBubble: React.FC<LeftBubbleProps> = ({ user, group, message }) => {
                   size="icon"
                   className="w-7 h-7 rounded-full bg-default-100 hover:bg-default-200 my-auto"
                 >
-                  <PiDotsThreeCircleVerticalFill className="w-12 h-12 text-purple-600" />
+                  <PiDotsThreeCircleVertical   className="w-12 h-12 text-[#4A32B0]" />
                 </Button>
               </div>
             </div>
             {/* text time */}
-            <span className="text-xs text-red-500">19:48</span>
+            <span className="text-xs text-[#e0f2fe]">19:48</span>
           </div>
         </div>
       </div>

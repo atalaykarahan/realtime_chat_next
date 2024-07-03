@@ -5,7 +5,8 @@ interface ConnectionStatusProps {
 }
 
 const ConnectionStatus: React.FC<ConnectionStatusProps> = ({ statusTitle }) => {
-  return <div className={`text-center bg-white`}>{statusTitle}</div>;
+
+  return <div className={`text-white absolute` }>{statusTitle}</div>;
 };
 
 export default ConnectionStatus;

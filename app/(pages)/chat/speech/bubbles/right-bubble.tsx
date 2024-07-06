@@ -26,7 +26,7 @@ const RightBubble: React.FC<RightBubbleProps> = ({ user, group, message }) => {
               </span>
             </div>
             <div className="whitespace-pre-wrap break-all">
-              <div className="bg-[#134e4a] text-primary-foreground  text-sm  py-2 px-3 rounded-2xl  flex-1  ">
+              <div className="bg-[#231758] text-primary-foreground  text-sm  py-2 px-3 rounded-2xl  flex-1  ">
                 {message}
               </div>
             </div>

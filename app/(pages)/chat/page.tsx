@@ -49,7 +49,7 @@ const ChatPage = () => {
         className="h-screen w-screen p-6 flex gap-5 relative"
         style={{ zIndex: "1" }}
       >
-        <div className="bg-white"> {message}</div>
+        {/* <div className="bg-white"> {message}</div> */}
         {/* {JSON.stringify(session)} */}
         <Sidebar user={user} />
 

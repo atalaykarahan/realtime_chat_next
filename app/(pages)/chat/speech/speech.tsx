@@ -1,6 +1,6 @@
 import { ScrollArea } from "@/components/ui/scroll-area";
-import LeftBuble from "./left-bubble";
-import RightBuble from "./right-bubble";
+import LeftBuble from "./bubbles/left-bubble";
+import RightBuble from "./bubbles/right-bubble";
 
 interface SpeechProps {
   user: any;

@@ -4,7 +4,7 @@ import CustomCard from "@/components/custom-card";
 import { useCurrentUser } from "@/hooks/use-current-user";
 import { useEffect, useState } from "react";
 import io, { Socket } from "socket.io-client";
-import ChatMessage from "./type-message";
+import WriteMessage from "./write-message";
 import ChatNavbar from "./chat-navbar";
 
 import Sidebar from "./sidebar/sidebar";
@@ -16,10 +16,11 @@ const ChatPage = () => {
   const [socket, setSocket] = useState<Socket | null>(null);
   const [connectionStatus, setConnectionStatus] =
     useState<string>("Bağlanıyor...");
-  const [message, setMessage] = useState<string>("");
+  // const [message, setMessage] = useState<string>("");
+  const [messages, setMessages] = useState<Array<{ fromUserId: string; text: string }>>([]);
 
   useEffect(() => {
-    const newSocket = io("http://localhost:9898/chat", {
+    const newSocket = io(process.env.SOCKET_IO_CONNECTION_URL as string, {
       transports: ["websocket", "polling"],
     });
     newSocket.on("connect", () => {
@@ -32,9 +33,15 @@ const ChatPage = () => {
       setConnectionStatus(`Bağlantı Hatası: ${error.message}`);
     });
 
-    newSocket.on("merhaba", (data) => {
-      setMessage(data);
-    });
+    //kullanici kendi id degerini dinlemeli
+    if(user && user.id){
+      newSocket.on(user.id, (data: { fromUserId: string; text: string }) => {
+        // console.log("mesaj dinleniyor")
+        // console.log(data);
+        setMessages((prevMessages:any) => [...prevMessages, data]);
+      });
+
+    }
 
     setSocket(newSocket);
     return () => {
@@ -49,17 +56,21 @@ const ChatPage = () => {
         className="h-screen w-screen p-6 flex gap-5 relative"
         style={{ zIndex: "1" }}
       >
-        {/* <div className="bg-white"> {message}</div> */}
+        {/* userın id degerini gormek icin */}
+        {/* {user && (
+        <div className="bg-white"> {user.id}</div>
+        )} */}
+
         {/* {JSON.stringify(session)} */}
         <Sidebar user={user} />
 
         <CustomCard className="flex-1 flex flex-col justify-between">
           {/* chatin ust kisminda konusulan kisinin resminin falan oldugu yer */}
           <ChatNavbar />
-          <Speech user={user} />
+          <Speech user={user} messages={messages} />
 
           <div className="mt-auto">
-            <ChatMessage />
+            <WriteMessage user={user} socket={socket} />
           </div>
         </CustomCard>
       </div>

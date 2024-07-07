@@ -4,15 +4,22 @@ import RightBuble from "./bubbles/right-bubble";
 
 interface SpeechProps {
   user: any;
+  messages: Array<{ fromUserId: string; text: string }>;
 }
 
-const Speech: React.FC<SpeechProps> = ({ user }) => {
+const Speech: React.FC<SpeechProps> = ({ user, messages }) => {
   return (
     <ScrollArea className="rounded-md">
     <div className=" mt-3 p-6 pt-0 relative flex-1 overflow-y-auto ">
       
         {/* buradaki scroll area ne ise yariyor silince hic bir sey degismiyor */}
-        <LeftBuble user={user} group={true} message="test deneme lorem ipsum" />
+
+
+      {messages.map((msg, index) => (
+         <LeftBuble key={index} user={user} group={true} message={msg.text} />
+      ))}
+
+       
         <RightBuble
           user={user}
           group={true}

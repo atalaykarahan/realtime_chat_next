@@ -12,13 +12,9 @@ const Speech: React.FC<SpeechProps> = ({ user, messages }) => {
     <ScrollArea className="rounded-md">
     <div className=" mt-3 p-6 pt-0 relative flex-1 overflow-y-auto ">
 
-        {/* buradaki scroll area ne ise yariyor silince hic bir sey degismiyor */}
-
-
       {messages.map((msg, index) => (
          <LeftBuble key={index} user={user} group={false} message={msg.message} />
       ))}
-
 
         <RightBuble
           user={user}

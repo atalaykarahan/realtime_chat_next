@@ -2,10 +2,15 @@
 const nextConfig = {
   env: {
     BASE_URL: process.env.BASE_URL,
+    SOCKET_IO_CONNECTION_URL: process.env.SOCKET_IO_CONNECTION_URL,
   },
   images: {
     unoptimized: true,
-    domains: ["dash-tail.vercel.app", "lh3.googleusercontent.com", "i.hizliresim.com"],
+    domains: [
+      "dash-tail.vercel.app",
+      "lh3.googleusercontent.com",
+      "i.hizliresim.com",
+    ],
   },
 };
 

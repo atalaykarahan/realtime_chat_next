@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import { PiDotsThreeCircleVertical } from "react-icons/pi";
+import Dropdown from "../dropdown";
 
 interface LeftBubbleProps {
   user: any;
@@ -43,7 +44,8 @@ const LeftBubble: React.FC<LeftBubbleProps> = ({ user, group, message }) => {
                   size="icon"
                   className="w-7 h-7 rounded-full bg-default-100 hover:bg-default-200 my-auto"
                 >
-                  <PiDotsThreeCircleVertical   className="w-12 h-12 text-[#4A32B0]" />
+                  {/* <PiDotsThreeCircleVertical   className="w-12 h-12 text-[#4A32B0]" /> */}
+                  <Dropdown isLeftMode={true} />
                 </Button>
               </div>
             </div>

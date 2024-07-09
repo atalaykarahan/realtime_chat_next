@@ -1,6 +1,6 @@
 import Image from "next/image";
 import { PiDotsThreeCircleVertical } from "react-icons/pi";
-
+import Dropdown from "../dropdown";
 
 interface RightBubbleProps {
   user: any;
@@ -22,7 +22,7 @@ const RightBubble: React.FC<RightBubbleProps> = ({ user, group, message }) => {
                 aria-expanded="false"
                 data-state="closed"
               >
-                <PiDotsThreeCircleVertical className="w-12 h-12 text-[#4A32B0]" />
+                <Dropdown />
               </span>
             </div>
             <div className="whitespace-pre-wrap break-all">

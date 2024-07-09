@@ -28,7 +28,7 @@ const Dropdown = () => {
           <DropdownMenuSeparator />
 
           <DropdownMenuItem>
-            <User className="mr-2 h-4 w-4" />
+            <User className="mr-2 h-4 w-4 text-blue-500" />
             Profil
           </DropdownMenuItem>
 
@@ -38,7 +38,7 @@ const Dropdown = () => {
               setAddFriendDialog(!addFriendDialog);
             }}
           >
-            <UserRoundPlus className="mr-2 h-4 w-4" />
+            <UserRoundPlus className="mr-2 h-4 w-4 text-green-600" />
             Arkadaş Ekle
           </DropdownMenuItem>
 

@@ -22,12 +22,11 @@ const WriteMessage: React.FC<WriteMessageProps> = ({ user, socket }) => {
     }
   };
 
-  const sendMessage = (toUserId: string, text: string) => {
+  const sendMessage = (DestionationUserId: string, message: string) => {
     if (socket && user) {
       socket.emit("sendMessage", {
-        fromUserId: user.id,
-        toUserId,
-        text,
+        DestionationUserId,
+        message,
       });
     }
   };

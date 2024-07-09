@@ -16,8 +16,7 @@ const ChatPage = () => {
   const [socket, setSocket] = useState<Socket | null>(null);
   const [connectionStatus, setConnectionStatus] =
     useState<string>("Bağlanıyor...");
-  // const [message, setMessage] = useState<string>("");
-  const [messages, setMessages] = useState<Array<{ fromUserId: string; text: string }>>([]);
+  const [messages, setMessages] = useState<Array<{ sender_id: string; message: string }>>([]);
 
   useEffect(() => {
     const newSocket = io(process.env.SOCKET_IO_CONNECTION_URL as string, {
@@ -35,7 +34,7 @@ const ChatPage = () => {
 
     //kullanici kendi id degerini dinlemeli
     if(user && user.id){
-      newSocket.on(user.id, (data: { fromUserId: string; text: string }) => {
+      newSocket.on("chat", (data: { sender_id: string; message: string }) => {
         // console.log("mesaj dinleniyor")
         // console.log(data);
         setMessages((prevMessages:any) => [...prevMessages, data]);

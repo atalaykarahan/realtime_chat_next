@@ -6,9 +6,15 @@ interface LeftBubbleProps {
   user: any;
   group?: boolean;
   message: string;
+  time: Date;
 }
 
-const LeftBubble: React.FC<LeftBubbleProps> = ({ user, group, message }) => {
+const LeftBubble: React.FC<LeftBubbleProps> = ({
+  user,
+  group,
+  message,
+  time,
+}) => {
   return (
     <div className="block md:px-6 px-4 ">
       <div className="flex space-x-2 items-start group rtl:space-x-reverse mb-4">
@@ -43,12 +49,19 @@ const LeftBubble: React.FC<LeftBubbleProps> = ({ user, group, message }) => {
                   size="icon"
                   className="w-7 h-7 rounded-full bg-default-100 hover:bg-default-200 my-auto"
                 >
-                  <PiDotsThreeCircleVertical   className="w-12 h-12 text-[#4A32B0]" />
+                  <PiDotsThreeCircleVertical className="w-12 h-12 text-[#4A32B0]" />
                 </Button>
               </div>
             </div>
             {/* text time */}
-            <span className="text-xs text-[#e0f2fe]">19:48</span>
+            <span className="text-xs text-[#e0f2fe]">
+              {new Date(time).toLocaleTimeString([], {
+                hour: "2-digit",
+                minute: "2-digit",
+                hour12: false, // 24 saat formatı için
+                timeZone: "Europe/Istanbul", // Türkiye saati için
+              })}
+            </span>
           </div>
         </div>
       </div>

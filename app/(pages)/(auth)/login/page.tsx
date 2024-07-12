@@ -1,7 +1,7 @@
 "use client";
 
 import { loginAction } from "@/actions/login";
-import { getLoggedInUser } from "@/app/api/services/auth.Service";
+import { getLoggedInUser } from "@/app/api/services/Auth.Service";
 import { cn } from "@/lib/utils";
 import { useEffect, useState } from "react";
 import Loading from "@/public/blocks-wave.svg";

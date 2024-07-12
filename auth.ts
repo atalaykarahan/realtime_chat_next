@@ -1,7 +1,7 @@
 import NextAuth, { DefaultSession } from "next-auth";
 
 import Credentials from "next-auth/providers/credentials";
-import { getLoggedInUserServer } from "./app/api/services/auth.Service";
+import { getLoggedInUserServer } from "./app/api/services/Auth.Service";
 import { cookies } from "next/dist/client/components/headers";
 
 /** bu metodun amaci user.role kismi boyle bir alan yok

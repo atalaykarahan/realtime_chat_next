@@ -1,35 +1,37 @@
 import { ScrollArea } from "@/components/ui/scroll-area";
-import LeftBuble from "./bubbles/left-bubble";
-import RightBuble from "./bubbles/right-bubble";
+import LeftBubble from "./bubbles/left-bubble";
+import RightBubble from "./bubbles/right-bubble";
+import { Message } from "@/models/Message";
 
 interface SpeechProps {
   user: any;
-  messages: Array<{ sender_id: string; message: string }>;
+  messages: Message[];
 }
 
 const Speech: React.FC<SpeechProps> = ({ user, messages }) => {
   return (
     <ScrollArea className="rounded-md">
-    <div className=" mt-3 p-6 pt-0 relative flex-1 overflow-y-auto ">
-
-      {messages.map((msg, index) => (
-         <LeftBuble key={index} user={user} group={false} message={msg.message} />
-      ))}
-
-        <RightBuble
-          user={user}
-          group={true}
-          message="Lorem, ipsum dolor sit amet consectetur adipisicing elit. Asperiores magnam explicabo cupiditate laudantium vitae quae, quidem beatae! Dolores eaque natus magni, sequi temporibus quisquam. Quo vitae voluptas atque magni obcaecati. Lorem, ipsum dolor sit amet consectetur adipisicing elit. Asperiores magnam explicabo cupiditate laudantium vitae quae, quidem beatae! Dolores eaque natus magni, sequi temporibus quisquam. Quo vitae voluptas atque magni obcaecati. Lorem, ipsum dolor sit amet consectetur adipisicing elit. Asperiores magnam explicabo cupiditate laudantium vitae quae, quidem beatae! Dolores eaque natus magni, sequi temporibus quisquam. Quo vitae voluptas atque magni obcaecati. Lorem, ipsum dolor sit amet consectetur adipisicing elit. Asperiores magnam explicabo cupiditate laudantium vitae quae, quidem beatae! Dolores eaque natus magni, sequi temporibus quisquam. Quo vitae voluptas atque magni obcaecati."
-        />
-
-
-        <LeftBuble
-          user={user}
-          group={true}
-          message="Lorem, ipsum dolor sit amet consectetur adipisicing elit. Asperiores magnam explicabo cupiditate laudantium vitae quae, quidem beatae! Dolores eaque natus magni, sequi temporibus quisquam. Quo vitae voluptas atque magni obcaecati. Lorem, ipsum dolor sit amet consectetur adipisicing elit. Asperiores magnam explicabo cupiditate laudantium vitae quae, quidem beatae! Dolores eaque natus magni, sequi temporibus quisquam. Quo vitae voluptas atque magni obcaecati. Lorem, ipsum dolor sit amet consectetur adipisicing elit. Asperiores magnam explicabo cupiditate laudantium vitae quae, quidem beatae! Dolores eaque natus magni, sequi temporibus quisquam. Quo vitae voluptas atque magni obcaecati. Lorem, ipsum dolor sit amet consectetur adipisicing elit. Asperiores magnam explicabo cupiditate laudantium vitae quae, quidem beatae! Dolores eaque natus magni, sequi temporibus quisquam. Quo vitae voluptas atque magni obcaecati."
-        />
-      
-    </div>
+      <div className=" mt-3 p-6 pt-0 relative flex-1 overflow-y-auto ">
+        {messages.map((msg) =>
+          msg.message_sender_id == user.id ? (
+            <RightBubble
+              time={msg.createdAt}
+              key={msg.message_id}
+              group={false}
+              user={user}
+              message={msg.message_content}
+            />
+          ) : (
+            <LeftBubble
+              time={msg.createdAt}
+              key={msg.message_id}
+              group={false}
+              user={user}
+              message={msg.message_content}
+            />
+          )
+        )}
+      </div>
     </ScrollArea>
   );
 };

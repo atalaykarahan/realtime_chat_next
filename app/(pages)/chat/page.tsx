@@ -6,13 +6,18 @@ import { useEffect, useState } from "react";
 import io, { Socket } from "socket.io-client";
 import WriteMessage from "./write-message";
 import ChatNavbar from "./chat-navbar";
-
+import Image from "next/image";
 import Sidebar from "./sidebar/sidebar";
 import Speech from "./speech/speech";
 import { PostPrivateConversation } from "@/app/api/services/Message.Service";
 import { Message } from "@/models/Message";
-
-
+import { Search } from "@/components/ui/search";
+import { Disclosure } from "@headlessui/react";
+import { LuPhone, LuInfo } from "react-icons/lu";
+import { HiOutlineDotsVertical } from "react-icons/hi";
+import { Card } from "@/components/ui/card";
+import { ScrollArea } from "@/components/ui/scroll-area";
+import AddFriendDummyData from "@/components/ui/addfriend-dummy";
 
 const ChatPage = () => {
   const user = useCurrentUser();
@@ -88,8 +93,68 @@ const ChatPage = () => {
         {/* {JSON.stringify(session)} */}
         <Sidebar user={user} />
 
+        {/* friends settings */}
         <CustomCard className="flex-1 flex flex-col justify-between">
-          {/* chatin ust kisminda konusulan kisinin resminin falan oldugu yer */}
+          {/* add friends */}
+          <Disclosure as="nav" className="border-b border-[#5C6B81]">
+            <div className="relative px-5 flex h-20 items-center justify-between">
+              <Search placeholder="Aramaya başla" />
+            </div>
+          </Disclosure>
+
+          <div className="grid grid-cols-2 flex-1 gap-4 p-8">
+            <CustomCard className="bg-transparent rounded-md border border-[#5C6B81] flex-1 flex flex-col justify-between">
+              <ScrollArea className="flex-1 rounded-md overflow-auto">
+                <div className="mt-3 p-6 pt-0 relative flex-1 overflow-y-auto">
+                  <AddFriendDummyData />
+                  <AddFriendDummyData />
+                  <AddFriendDummyData />
+                  <AddFriendDummyData />
+                  <AddFriendDummyData />
+                  <AddFriendDummyData />
+                  <AddFriendDummyData />
+                  <AddFriendDummyData />
+                  <AddFriendDummyData />
+                  <AddFriendDummyData />
+                  <AddFriendDummyData />
+                  <AddFriendDummyData />
+                  <AddFriendDummyData />
+                  <AddFriendDummyData />
+                  <AddFriendDummyData />
+                  <AddFriendDummyData />
+                  <AddFriendDummyData />
+                  <AddFriendDummyData />
+                  <AddFriendDummyData />
+                  <AddFriendDummyData />
+                  <AddFriendDummyData />
+                  <AddFriendDummyData />
+                  <AddFriendDummyData />
+                  <AddFriendDummyData />
+                  <AddFriendDummyData />
+                  <AddFriendDummyData />
+                  <AddFriendDummyData />
+                  <AddFriendDummyData />
+                  <AddFriendDummyData />
+                  <AddFriendDummyData />
+                  <AddFriendDummyData />
+                  <AddFriendDummyData />
+                  <AddFriendDummyData />
+                  <AddFriendDummyData />
+                </div>
+              </ScrollArea>
+            </CustomCard>
+
+            <CustomCard className="bg-transparent rounded-md border border-[#5C6B81]">
+              <p>karahan</p>
+            </CustomCard>
+          </div>
+        </CustomCard>
+
+        {/* chat box */}
+        {/* duruma göre hidden vericeksin atalay !!!!! */}
+        {/* <CustomCard className="flex-1 flex flex-col justify-between"> */}
+        {/* chatin ust kisminda konusulan kisinin resminin falan oldugu yer */}
+        <CustomCard className="flex-1 hidden flex-col justify-between">
           <ChatNavbar />
 
           {/* New Chat Message */}

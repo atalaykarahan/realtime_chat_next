@@ -11,6 +11,7 @@ const Search = React.forwardRef<HTMLInputElement, InputProps>(
   ({ className, ...props }, ref) => {
     return (
       <div
+      style={{ width: "-webkit-fill-available" }}
         className={cn(
           "flex h-10 items-center rounded-md border border-[#5C6B81]  bg-transparent pl-3 text-sm text-white",
           className

@@ -2,13 +2,20 @@ import Image from "next/image";
 import { PiDotsThreeCircleVertical } from "react-icons/pi";
 import Dropdown from "../dropdown";
 
+
 interface RightBubbleProps {
   user: any;
   group?: boolean;
   message: string;
+  time: Date;
 }
 
-const RightBubble: React.FC<RightBubbleProps> = ({ user, group, message }) => {
+const RightBubble: React.FC<RightBubbleProps> = ({
+  user,
+  group,
+  message,
+  time,
+}) => {
   return (
     <div className="block md:px-6 px-4 ">
       <div className="flex space-x-2 items-start  justify-end group w-full rtl:space-x-reverse mb-4">
@@ -31,7 +38,14 @@ const RightBubble: React.FC<RightBubbleProps> = ({ user, group, message }) => {
               </div>
             </div>
           </div>
-          <span className="text-xs text-end text-[#e0f2fe]">19:48</span>
+          <span className="text-xs text-end text-[#e0f2fe]">
+            {new Date(time).toLocaleTimeString([], {
+              hour: "2-digit",
+              minute: "2-digit",
+              hour12: false, // 24 saat formatı için
+              timeZone: "Europe/Istanbul", // Türkiye saati için
+            })}
+          </span>
         </div>
         {group && (
           <div className="flex-none self-end -translate-y-5">

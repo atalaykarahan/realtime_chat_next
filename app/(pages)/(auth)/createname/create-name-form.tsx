@@ -1,5 +1,5 @@
 "use client";
-import { signup } from "@/app/api/services/auth.Service";
+import { signup } from "@/app/api/services/Auth.Service";
 import FormError from "@/components/form-error";
 import {
   Form,

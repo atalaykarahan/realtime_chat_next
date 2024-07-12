@@ -9,16 +9,25 @@ import ChatNavbar from "./chat-navbar";
 
 import Sidebar from "./sidebar/sidebar";
 import Speech from "./speech/speech";
-// import { auth } from "@/auth";
+import { PostPrivateConversation } from "@/app/api/services/Message.Service";
+import { Message } from "@/models/Message";
+
+
 
 const ChatPage = () => {
   const user = useCurrentUser();
   const [socket, setSocket] = useState<Socket | null>(null);
   const [connectionStatus, setConnectionStatus] =
     useState<string>("Bağlanıyor...");
-  const [messages, setMessages] = useState<Array<{ sender_id: string; message: string }>>([]);
+  const [messages, setMessages] = useState<
+    Array<{ sender_id: string; message: string }>
+  >([]);
+  const [oldMessages, setOldMessages] = useState<Message[]>([]);
 
   useEffect(() => {
+    if (user && user.id) oldSpeech(user.id, "114950733215735919150");
+
+    //#region SOCKET.IO
     const newSocket = io(process.env.SOCKET_IO_CONNECTION_URL as string, {
       transports: ["websocket", "polling"],
     });
@@ -33,20 +42,36 @@ const ChatPage = () => {
     });
 
     //kullanici kendi id degerini dinlemeli
-    if(user && user.id){
+    if (user && user.id) {
       newSocket.on("chat", (data: { sender_id: string; message: string }) => {
         // console.log("mesaj dinleniyor")
         // console.log(data);
-        setMessages((prevMessages:any) => [...prevMessages, data]);
+        setMessages((prevMessages: any) => [...prevMessages, data]);
       });
-
     }
 
     setSocket(newSocket);
     return () => {
       if (newSocket) newSocket.close();
     };
+    //#endregion
   }, []);
+
+  //#region OLD SPEECH
+  const oldSpeech = async (sender_id: string, receiver_id: string) => {
+    try {
+      const res = await PostPrivateConversation(sender_id, receiver_id);
+
+      if (res.status !== 200) {
+        console.error("Mesaj ile ilgili bir sorun oluştu", res);
+      }
+
+      setOldMessages(res.data);
+    } catch (error) {
+      console.error("hata oldu mesajlar gelemedi ", error);
+    }
+  };
+  //#endregion
 
   return (
     <>
@@ -66,8 +91,12 @@ const ChatPage = () => {
         <CustomCard className="flex-1 flex flex-col justify-between">
           {/* chatin ust kisminda konusulan kisinin resminin falan oldugu yer */}
           <ChatNavbar />
-          <Speech user={user} messages={messages} />
 
+          {/* New Chat Message */}
+          <Speech user={user} messages={oldMessages} />
+          {/* <Speech user={user} messages={messages} /> */}
+
+          {/* write new message section */}
           <div className="mt-auto">
             <WriteMessage user={user} socket={socket} />
           </div>

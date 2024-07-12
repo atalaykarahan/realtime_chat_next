@@ -1,6 +1,6 @@
 "use server";
 
-import { logoutServer } from "@/app/api/services/auth.Service";
+import { logoutServer } from "@/app/api/services/Auth.Service";
 import { cookies } from "next/dist/client/components/headers";
 import { signOut } from "@/auth";
 

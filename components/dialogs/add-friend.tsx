@@ -1,7 +1,7 @@
 "use client";
 import { Dialog, DialogContent } from "../ui/dialog";
 import CustomCard from "@/components/custom-card";
-import AddFriendDummyData from "@/components/ui/addfriend-dummy";
+import AddFriendDummyData from "@/components/ui/friends-dummy";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Search } from "@/components/ui/search";
 

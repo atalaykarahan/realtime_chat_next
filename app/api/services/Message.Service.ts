@@ -5,8 +5,8 @@ export const PostPrivateConversation = async (
   receiver_id: string
 ) => {
   const body = {
-    sender_id: sender_id,
-    receiver_id: receiver_id,
+    message_sender_id: sender_id,
+    message_receiver_id: receiver_id,
   };
-  return await axios.post("/message/conversation_private", body);
+  return await axios.post("/message/conversation/private", body);
 };

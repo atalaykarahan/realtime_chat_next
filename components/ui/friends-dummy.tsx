@@ -3,8 +3,11 @@ import { UserRoundPlus } from "lucide-react";
 import Image from "next/image";
 import { PiDotsThreeCircleVertical } from "react-icons/pi";
 import { Button } from "./button";
+import { IoChatboxEllipsesOutline } from "react-icons/io5";
+import { GoBlocked } from "react-icons/go";
+import { LuUserX } from "react-icons/lu";
 
-const AddFriendDummyData = () => {
+const FriendsDummyData = () => {
   return (
     <>
       <div className="gap-4 py-2 lg:py-2.5 px-3 mx-3 rounded-md hover:bg-[#4A32B0]/30 transition-all duration-500 cursor-pointer flex items-center">
@@ -33,12 +36,14 @@ const AddFriendDummyData = () => {
             </div>
           </div>
         </div>
-        <div className="flex-none flex items-center gap-2 ml-auto lg:ml-0">
-          <UserRoundPlus className="text-white h-5 w-5  opacity-70 hover:opacity-100" />
+        <div className="flex-none flex items-center justify-center  gap-2 ml-auto lg:ml-0">
+          <GoBlocked className="text-rose-600 h-5 w-5 transition-all duration-500   opacity-70 hover:opacity-100" />
+          <LuUserX className="text-white h-5 w-5 transition-all duration-500   opacity-70 hover:opacity-100" />
+          <IoChatboxEllipsesOutline className="text-white transition-all duration-500 h-5 w-5  opacity-70 hover:opacity-100" />
         </div>
       </div>
     </>
   );
 };
 
-export default AddFriendDummyData;
+export default FriendsDummyData;

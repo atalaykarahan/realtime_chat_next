@@ -1,6 +1,6 @@
 "use client";
 import CustomCard from "@/components/custom-card";
-import AddFriend from "./add-friens";
+import AddFriend from "./add-friends";
 import FriendsComponent from "./friends-component/friends";
 import RequestsComponent from "./requests-component/requests";
 

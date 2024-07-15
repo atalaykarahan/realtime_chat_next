@@ -16,6 +16,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
+import { SendFriendRequest } from "@/app/api/services/friendship.Service";
 
 const AddFriend = () => {
   const [errorMessage, setErrorMessage] = useState("");
@@ -29,6 +30,16 @@ const AddFriend = () => {
 
   const onSubmit = async (values: z.infer<typeof AddFriendSchemas>) => {
     console.warn("values", values);
+
+    const res = await SendFriendRequest(values.email)
+    if (res.status === 201) {
+      console.log("arkadas eklendi");
+    } else if (res.status === 200) {
+      console.log("mail gonderildi");
+    } else {
+      console.error("arkadas eklenirken bir sorun olustu", res);
+    }
+    
   };
 
   return (

@@ -10,3 +10,7 @@ export const PostPrivateConversation = async (
   };
   return await axios.post("/message/conversation/private", body);
 };
+
+export const GetConversation = async () => {
+  return await axios.get("/message/conversation");
+};

@@ -7,14 +7,48 @@ import {
 import { GoBlocked } from "react-icons/go";
 import { IoChatboxEllipsesOutline } from "react-icons/io5";
 import { LuUserX } from "react-icons/lu";
+import { FriendsModel } from "../friends";
+import { Accept, Block, Delete, Reject } from "@/app/api/services/friendship.Service";
 
-const Options = () => {
+interface FriendsProps {
+  friends: FriendsModel;
+}
+
+const block = async (senderId: string) => {
+  const res = await Block(senderId)
+  if (res.status !== 200) {
+    console.error(
+      "geçmiş mesajları getirmekle ilgili bir sorun oluştu ",
+      res
+    );
+  } else {
+    console.log("basariyla blocklandi")
+  }
+
+};
+
+const deleteFriend = async (senderId: string) => {
+  const res = await Delete(senderId)
+  if (res.status !== 204) {
+    console.error(
+      "arkadaslik silinirken hata",
+      res
+    );
+  } else {
+    console.log("basariyla silindi")
+  }
+};
+
+
+const Options: React.FC<FriendsProps> = ({ friends }) => {
   return (
     <>
       <TooltipProvider>
         <Tooltip>
           <TooltipTrigger>
-            <GoBlocked className="text-rose-600 h-5 w-5 transition-all duration-500   opacity-70 hover:opacity-100" />
+            <GoBlocked
+             onClick={() => block(friends.sender_id)}
+             className="text-rose-600 h-5 w-5 transition-all duration-500   opacity-70 hover:opacity-100" />
           </TooltipTrigger>
           <TooltipContent>
             <p>Engelle</p>
@@ -24,7 +58,9 @@ const Options = () => {
       <TooltipProvider>
         <Tooltip>
           <TooltipTrigger>
-            <LuUserX className="text-white h-5 w-5 transition-all duration-500   opacity-70 hover:opacity-100" />
+            <LuUserX
+            onClick={() => deleteFriend(friends.sender_id)}
+            className="text-white h-5 w-5 transition-all duration-500   opacity-70 hover:opacity-100" />
           </TooltipTrigger>
           <TooltipContent>
             <p>Arkadaşı Sil</p>

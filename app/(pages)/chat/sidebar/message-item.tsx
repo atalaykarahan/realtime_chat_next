@@ -1,7 +1,7 @@
 "use client";
 import Image from "next/image";
 import { MessageItemModel } from "./sidebar";
-import { changeValue } from "@/app/redux/slices/message-boxSlice";
+import { openChatBox } from "@/app/redux/slices/message-boxSlice";
 import {useDispatch} from "react-redux"
 import { AppDispatch } from "@/app/redux/store";
 
@@ -18,8 +18,8 @@ const MessageItem: React.FC<MessageItemProps> = ({ message }) => {
 
 
     const openMessageBox = () => {
-      console.log(message.other_user_email, "bu userın içerdiği kutuya tıklanıldı");
-      dispatch(changeValue())
+      const updatedMessage = { ...message, chatBoxStatus: true };
+      dispatch(openChatBox(updatedMessage))
     }
 
 

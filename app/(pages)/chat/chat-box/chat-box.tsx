@@ -18,7 +18,7 @@ interface ChatBoxProps {
 
 const ChatBox: React.FC<ChatBoxProps> = ({ user, messages, socket }) => {
   const [oldMessages, setOldMessages] = useState<Message[]>([]);
-  const statusValue = useAppSelector((state) => state.messageBoxReducer.value);
+  const chatBoxValue = useAppSelector((state) => state.messageBoxReducer.value);
 
   useEffect(() => {
     if (user && user.id)
@@ -48,13 +48,14 @@ const ChatBox: React.FC<ChatBoxProps> = ({ user, messages, socket }) => {
     <CustomCard
       className={cn(
         "flex-1 flex-col justify-between",
-        statusValue == true ? "" : "hidden"
+        chatBoxValue.chatBoxStatus == true ? "flex" : "hidden"
       )}
     >
       <ChatNavbar />
 
       {/* New Chat Message */}
-      <Speech user={user} messages={oldMessages} />
+      <Speech user={user} messages={chatBoxValue.messages} />
+      {/* <Speech user={user} messages={oldMessages} /> */}
       {/* <Speech user={user} messages={messages} /> */}
 
       {/* write new message section */}

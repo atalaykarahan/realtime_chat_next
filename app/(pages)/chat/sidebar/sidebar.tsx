@@ -1,11 +1,11 @@
 "use client";
-import CustomCard from "@/components/custom-card";
-import UserProfile from "../user-profile/user-profile";
-import { ScrollArea } from "@/components/ui/scroll-area";
-import MessageItem from "./message-item";
-import { useEffect, useState } from "react";
 import { GetConversation } from "@/app/api/services/Message.Service";
+import CustomCard from "@/components/custom-card";
+import { ScrollArea } from "@/components/ui/scroll-area";
 import { Message } from "@/models/Message";
+import { useEffect, useState } from "react";
+import UserProfile from "../user-profile/user-profile";
+import MessageItem from "./message-item";
 
 interface SidebarProps {
   user: any;

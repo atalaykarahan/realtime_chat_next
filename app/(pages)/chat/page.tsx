@@ -1,31 +1,24 @@
 "use client";
-import { PostPrivateConversation } from "@/app/api/services/Message.Service";
 import ConnectionStatus from "@/components/connection-status";
-import CustomCard from "@/components/custom-card";
 import { useCurrentUser } from "@/hooks/use-current-user";
 import { Message } from "@/models/Message";
 import { useEffect, useState } from "react";
 import io, { Socket } from "socket.io-client";
-import ChatNavbar from "./chat-navbar";
+import ChatBox from "./chat-box/chat-box";
 import FriendsSettings from "./friends/page";
 import Sidebar from "./sidebar/sidebar";
-import Speech from "./speech/speech";
-import WriteMessage from "./write-message";
+import { changeValue } from "@/app/redux/slices/message-boxSlice";
+import {useDispatch} from "react-redux"
 
 const ChatPage = () => {
   const user = useCurrentUser();
   const [socket, setSocket] = useState<Socket | null>(null);
   const [connectionStatus, setConnectionStatus] =
     useState<string>("Bağlanıyor...");
-  const [messages, setMessages] = useState<
-    Array<{ sender_id: string; message: string }>
-  >([]);
-  const [oldMessages, setOldMessages] = useState<Message[]>([]);
+
+  const [messages, setMessages] = useState<Message[]>([]);
 
   useEffect(() => {
-    if (user && user.id)
-      oldSpeech("115849378656249115607", "115943935417963963678");
-
     //#region SOCKET.IO
 
     const newSocket = io(process.env.SOCKET_IO_CONNECTION_URL as string, {
@@ -58,24 +51,6 @@ const ChatPage = () => {
     //#endregion
   }, []);
 
-  //#region OLD SPEECH
-  const oldSpeech = async (sender_id: string, receiver_id: string) => {
-    try {
-      const res = await PostPrivateConversation(sender_id, receiver_id);
-
-      if (res.status !== 200) {
-        console.error("Mesaj ile ilgili bir sorun oluştu", res);
-      }
-
-      console.warn(res.data.data);
-
-      setOldMessages(res.data.data);
-    } catch (error) {
-      console.error("hata oldu mesajlar gelemedi ", error);
-    }
-  };
-  //#endregion
-
   return (
     <>
       <ConnectionStatus statusTitle={connectionStatus} />
@@ -95,21 +70,20 @@ const ChatPage = () => {
         <FriendsSettings />
 
         {/* chat box */}
+        <ChatBox user={user} messages={messages} socket={socket} />
         {/* duruma göre hidden vericeksin atalay !!!!! */}
         {/* <CustomCard className="flex-1 flex flex-col justify-between"> */}
         {/* chatin ust kisminda konusulan kisinin resminin falan oldugu yer */}
-        <CustomCard className="flex-1 hidden flex-col justify-between">
+        {/* <CustomCard className="flex-1 hidden flex-col justify-between">
           <ChatNavbar />
 
-          {/* New Chat Message */}
+   
           <Speech user={user} messages={oldMessages} />
-          {/* <Speech user={user} messages={messages} /> */}
-
-          {/* write new message section */}
+    
           <div className="mt-auto">
             <WriteMessage user={user} socket={socket} />
           </div>
-        </CustomCard>
+        </CustomCard> */}
       </div>
     </>
   );

@@ -2,9 +2,9 @@ import axios from "../axios";
 
 export const SendFriendRequest = async (email: string) => {
   const body = {
-    email: email,
+    receiver_mail: email,
   };
-  return await axios.post("/friendship", body);
+  return await axios.post("/request", body);
 };
 
 export const ComingRequests = async () => {

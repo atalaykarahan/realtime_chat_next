@@ -20,7 +20,7 @@ export const Reject = async (senderMail: string) => {
 
 export const SendFriendRequest = async (email: string) => {
   const body = {
-    friend_mail: email,
+    receiver_mail: email,
   };
   return await axios.post("/request", body);
 };

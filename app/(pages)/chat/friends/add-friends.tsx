@@ -1,23 +1,16 @@
 "use client";
 import FormError from "@/components/form-error";
 import {Button} from "@/components/ui/button";
-import {
-    Form,
-    FormControl,
-    FormField,
-    FormItem,
-    FormMessage,
-} from "@/components/ui/form";
+import {Form, FormControl, FormField, FormItem, FormMessage,} from "@/components/ui/form";
 import {Search} from "@/components/ui/search";
 import {Disclosure} from "@headlessui/react";
-
-import { AddFriendSchemas } from "@/schemas/addfriend";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useState } from "react";
-import { useForm } from "react-hook-form";
-import { z } from "zod";
-import { SendFriendRequest } from "@/app/api/services/request.Service";
-
+import {toast} from "sonner"
+import {AddFriendSchemas} from "@/schemas/addfriend";
+import {zodResolver} from "@hookform/resolvers/zod";
+import {useState} from "react";
+import {useForm} from "react-hook-form";
+import {z} from "zod";
+import {SendFriendRequest} from "@/app/api/services/request.Service";
 
 const AddFriend = () => {
     const [errorMessage, setErrorMessage] = useState("");
@@ -28,15 +21,19 @@ const AddFriend = () => {
             email: "",
         },
     });
-// test 
-    const onSubmit = async (values: z.infer<typeof AddFriendSchemas>) => {
-        console.warn("values", values);
 
-        const res = await SendFriendRequest(values.email)
+    const onSubmit = async (values: z.infer<typeof AddFriendSchemas>) => {
+        const res = await SendFriendRequest(values.email);
         if (res.status === 201) {
-            console.log("arkadas eklendi");
-        } else if (res.status === 200) {
-            console.log("mail gonderildi");
+            console.log("arkadas eklendi buraya bir toaster ve inputu temizle");
+            toast("Arkadaşlık isteği başarıyla gönderildi", {
+                description: `${values.email} adli kişiye isteğiniz gönderildi.`,
+                action: {
+                    label: "Geri Al",
+                    onClick: () => console.log("İptal etme butonuna basıldı"),
+                },
+            })
+            form.reset({email: ""});
         } else {
             console.error("arkadas eklenirken bir sorun olustu", res);
         }

@@ -4,7 +4,7 @@ import axios from "../axios";
 // kayit olmak icin
 export const signup = async (token: string, username: string) => {
   return await axios.post(
-    "/auth/signup",
+    "/user/signup",
     { username: username },
     {
       headers: {

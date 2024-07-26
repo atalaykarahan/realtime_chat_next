@@ -16,7 +16,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
-import { SendFriendRequest } from "@/app/api/services/friendship.Service";
+import { SendFriendRequest } from "@/app/api/services/request.Service";
 
 const AddFriend = () => {
   const [errorMessage, setErrorMessage] = useState("");

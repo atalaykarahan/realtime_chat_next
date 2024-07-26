@@ -8,27 +8,15 @@ import { BsCheckLg } from "react-icons/bs";
 import { GoBlocked } from "react-icons/go";
 import { LiaTimesSolid } from "react-icons/lia";
 import { ComingRequestsModel } from "../requests";
-import { Accept, Block, Reject } from "@/app/api/services/friendship.Service";
+import {  Accept, Reject } from "@/app/api/services/request.Service";
 
 interface ComingRequestsProps {
   requests: ComingRequestsModel;
 }
 
-const block = async (senderId: string) => {
-  const res = await Block(senderId)
-  if (res.status !== 200) {
-    console.error(
-      "geçmiş mesajları getirmekle ilgili bir sorun oluştu ",
-      res
-    );
-  } else {
-    console.log("basariyla blocklandi")
-  }
 
-};
-
-const accept = async (senderId: string) => {
-  const res = await Accept(senderId)
+const accept = async (senderMail: string) => {
+  const res = await Accept(senderMail)
   if (res.status !== 200) {
     console.error(
       "arkadaslik istegi onaylanirken hata",
@@ -39,8 +27,8 @@ const accept = async (senderId: string) => {
   }
 };
 
-const reject = async (senderId: string) => {
-  const res = await Reject(senderId)
+const reject = async (senderMail: string) => {
+  const res = await Reject(senderMail)
   if (res.status !== 200) {
     console.error(
       "arkadaslik istegi reddedilirken hata",
@@ -54,26 +42,14 @@ const reject = async (senderId: string) => {
 const Options: React.FC<ComingRequestsProps> = ({ requests }) => {
   return (
     <>
-      <TooltipProvider>
-        <Tooltip>
-          <TooltipTrigger>
-            <GoBlocked
-              onClick={() => block(requests.sender_id)}
-              className="text-rose-600 h-5 w-5 transition-all duration-500 opacity-70 hover:opacity-100"
-            />
-          </TooltipTrigger>
-          <TooltipContent>
-            <p>Engelle</p>
-          </TooltipContent>
-        </Tooltip>
-      </TooltipProvider>
+      
 
       <TooltipProvider>
         <Tooltip>
           <TooltipTrigger>
             <BsCheckLg
-              onClick={() => accept(requests.sender_id)}
-              className="text-white h-5 w-5 transition-all duration-500 opacity-70 hover:opacity-100"
+              onClick={() => accept(requests.sender_mail)}
+              className="text-[#3b82f6] h-5 w-5 transition-all duration-500 opacity-70 hover:opacity-100"
             />
           </TooltipTrigger>
           <TooltipContent>
@@ -86,8 +62,8 @@ const Options: React.FC<ComingRequestsProps> = ({ requests }) => {
         <Tooltip>
           <TooltipTrigger>
             <LiaTimesSolid
-              onClick={() => reject(requests.sender_id)}
-              className="text-white transition-all duration-500 h-5 w-5 opacity-70 hover:opacity-100"
+              onClick={() => reject(requests.sender_mail)}
+              className="text-[#e11d48] transition-all duration-500 h-5 w-5 opacity-70 hover:opacity-100"
             />
           </TooltipTrigger>
           <TooltipContent>

@@ -1,6 +1,13 @@
 import axios from "../axios";
 
 
+export const SendFriendRequest = async (email: string) => {
+  const body = {
+    receiver_mail: email,
+  };
+  return await axios.post("/request", body);
+};
+
 
 export const Friends = async () => {
     return await axios.get("/friend");

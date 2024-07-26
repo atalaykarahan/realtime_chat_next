@@ -21,15 +21,16 @@ const AddFriendDialog: React.FC<AddFriendDialogProps> = ({
         <CustomCard className="hidden lg:flex flex-col flex-none max-h-[500px] bg-transparent rounded-md border border-[#5C6B81]">
           <ScrollArea className="flex-1 rounded-md overflow-auto">
             <div className="pt-3 pr-2">
-              <FriendItem />
-              <FriendItem />
-              <FriendItem />
-              <FriendItem />
-              <FriendItem />
-              <FriendItem />
-              <FriendItem />
-              <FriendItem />
-              <FriendItem />
+              {/*hata veriyor diye simdilik bu alttaki kisimleri kapattik*/}
+              {/*<FriendItem />*/}
+              {/*<FriendItem />*/}
+              {/*<FriendItem />*/}
+              {/*<FriendItem />*/}
+              {/*<FriendItem />*/}
+              {/*<FriendItem />*/}
+              {/*<FriendItem />*/}
+              {/*<FriendItem />*/}
+              {/*<FriendItem />*/}
             </div>
           </ScrollArea>
         </CustomCard>

@@ -4,6 +4,7 @@ import "./globals.css";
 import { Toaster } from "@/components/ui/sonner";
 import { auth } from "@/auth";
 import { SessionProvider } from "next-auth/react";
+import { ReduxProvider } from "./redux/provider";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -22,7 +23,7 @@ export default async function RootLayout({
     <SessionProvider session={session}>
       <html lang="tr">
         <body className={inter.className}>
-          {children}
+          <ReduxProvider>{children}</ReduxProvider>
           <Toaster richColors />
         </body>
       </html>

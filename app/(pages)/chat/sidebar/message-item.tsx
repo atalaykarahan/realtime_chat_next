@@ -1,5 +1,9 @@
+"use client";
 import Image from "next/image";
 import { MessageItemModel } from "./sidebar";
+import { openChatBox } from "@/app/redux/slices/message-boxSlice";
+import {useDispatch} from "react-redux"
+import { AppDispatch } from "@/app/redux/store";
 
 interface MessageItemProps {
   message: MessageItemModel;
@@ -10,8 +14,18 @@ const MessageItem: React.FC<MessageItemProps> = ({ message }) => {
     return prev.message_id > current.message_id ? prev : current;
   });
 
+    const dispatch = useDispatch<AppDispatch>();
+
+
+    const openMessageBox = () => {
+      const updatedMessage = { ...message, chatBoxStatus: true };
+      dispatch(openChatBox(updatedMessage))
+    }
+
+
+
   return (
-    <div onClick={() => console.log(message.other_user_email, "bu userın içerdiği kutuya tıklanıldı")} className="gap-4 py-2 lg:py-2.5 px-3 border-l-2 border-transparent hover:bg-default-200 cursor-pointer flex">
+    <div onClick={openMessageBox}  className="gap-4 py-2 lg:py-2.5 px-3 border-l-2 border-transparent hover:bg-default-200 cursor-pointer flex">
       <div className="flex-1 flex  gap-3 ">
         <div className="relative inline-block ">
           <span className="relative flex h-12 w-12 shrink-0 overflow-hidden rounded-full">

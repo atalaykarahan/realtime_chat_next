@@ -27,7 +27,7 @@ const AddFriend = () => {
             email: "",
         },
     });
-
+// test 
     const onSubmit = async (values: z.infer<typeof AddFriendSchemas>) => {
         console.warn("values", values);
 

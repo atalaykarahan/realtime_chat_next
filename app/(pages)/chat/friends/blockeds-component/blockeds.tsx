@@ -2,27 +2,27 @@
 
 import CustomCard from "@/components/custom-card";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import FriendItem from "./friend-item/item";
+import FriendItem from "./blocked-item/item";
 import { useEffect, useState } from "react";
-import { Friends } from "@/app/api/services/friendship.Service";
+import { Blockeds } from "@/app/api/services/friendship.Service";
 
-export interface FriendsModel {
-  friend_mail: string;
+export interface BlockedsModel {
+  blocked_mail: string;
   user_name: string;
   user_photo: string;
 }
 
 
-const FriendsComponent = () => {
+const BlockedsComponent = () => {
 
-  const [friends, setFriends] = useState<FriendsModel[]>();
+  const [friends, setFriends] = useState<BlockedsModel[]>();
 
   useEffect(() => {
     fetchData();
   }, []);
 
   const fetchData = async () => {
-    const res = await Friends();
+    const res = await Blockeds();
 
     if (res.status !== 200) {
       console.error(
@@ -35,12 +35,12 @@ const FriendsComponent = () => {
   };
 
   return (
-    <CustomCard className="bg-transparent rounded-md border border-[#5C6B81] flex-1 flex flex-col justify-between">
-      <ScrollArea className="h-[81dvh] rounded-md">
+    <CustomCard className="bg-transparent rounded-md border border-[#5C6B81] flex-1 flex flex-col justify-between h-full">
+      <ScrollArea className="rounded-md">
         <div className="mt-3 p-6 pt-0 relative">
           
         {friends?.map((reqs) => (
-            <FriendItem friends={reqs} key={reqs.friend_mail} />
+            <FriendItem blocked={reqs} key={reqs.blocked_mail} />
           ))}
           {/* <FriendItem />
           <FriendItem />
@@ -53,4 +53,4 @@ const FriendsComponent = () => {
   );
 };
 
-export default FriendsComponent;
+export default BlockedsComponent;

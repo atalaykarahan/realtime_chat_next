@@ -11,12 +11,13 @@ import {
 import {Search} from "@/components/ui/search";
 import {Disclosure} from "@headlessui/react";
 
-import {AddFriendSchemas} from "@/schemas/addfriend";
-import {zodResolver} from "@hookform/resolvers/zod";
-import {useState} from "react";
-import {useForm} from "react-hook-form";
-import {z} from "zod";
-import {SendFriendRequest} from "@/app/api/services/friendship.Service";
+import { AddFriendSchemas } from "@/schemas/addfriend";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useState } from "react";
+import { useForm } from "react-hook-form";
+import { z } from "zod";
+import { SendFriendRequest } from "@/app/api/services/request.Service";
+
 
 const AddFriend = () => {
     const [errorMessage, setErrorMessage] = useState("");

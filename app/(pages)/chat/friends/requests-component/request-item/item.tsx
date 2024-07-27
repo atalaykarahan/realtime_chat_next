@@ -8,8 +8,6 @@ interface ComingRequestsProps {
 }
 
 const RequestItem: React.FC<ComingRequestsProps> = ({ requests }) => {
-  
-  
   return (
     <div onClick={() => console.log(requests.sender_mail, "bu userın içerdiği kutuya tıklanıldı")} className="gap-4 py-2 lg:py-2.5 px-3 mx-3 rounded-md hover:bg-[#4A32B0]/30 transition-all duration-500 cursor-pointer flex items-center">
       <div className="flex-1 flex gap-3">

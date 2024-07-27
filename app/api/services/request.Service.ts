@@ -1,26 +1,21 @@
 import axios from "../axios";
+import {RequestStatus} from "@/models/Enum";
 
 export const ComingRequests = async () => {
-  return await axios.get("/request");
+    return await axios.get("/request");
 };
 
-export const Accept = async (senderMail: string) => {
+export const UpdateFriendshipRequest = async (senderMail: string, status: RequestStatus) => {
     const body = {
-        friend_mail : senderMail
+        sender_mail: senderMail,
+        status: status,
     }
-    return await axios.patch("/request/accept",body)
-}
-
-export const Reject = async (senderMail: string) => {
-    const body = {
-        friend_mail : senderMail
-    }
-    return await axios.patch("/request/reject", body)
+    return await axios.patch("/request", body)
 }
 
 export const SendFriendRequest = async (email: string) => {
-  const body = {
-    receiver_mail: email,
-  };
-  return await axios.post("/request", body);
+    const body = {
+        receiver_mail: email,
+    };
+    return await axios.post("/request", body);
 };

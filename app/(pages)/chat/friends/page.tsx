@@ -19,10 +19,10 @@ const FriendsSettings = () => {
     >
       <AddFriend />
       <div className="grid grid-cols-2 flex-1 gap-4 p-5">
-        <FriendsComponent />
+        {/*<FriendsComponent />*/}
         <div className="flex flex-col h-full gap-4">
           <RequestsComponent />
-          <BlockedsComponent/>
+          {/*<BlockedsComponent/>*/}
         </div>
       </div>
     </CustomCard>

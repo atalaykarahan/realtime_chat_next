@@ -3,7 +3,7 @@ import {GoBlocked} from "react-icons/go";
 import {IoChatboxEllipsesOutline} from "react-icons/io5";
 import {LuUserX} from "react-icons/lu";
 import {FriendsModel} from "../friends";
-import {Block, Delete} from "@/app/api/services/friendship.Service";
+import {Block, Remove} from "@/app/api/services/friendship.Service";
 import {toast} from "sonner";
 
 interface FriendsProps {
@@ -25,15 +25,18 @@ const block = async (friendMail: string, friendName: string) => {
     }
 };
 
-const deleteFriend = async (friendMail: string) => {
-    const res = await Delete(friendMail)
-    if (res.status !== 204) {
-        console.error(
-            "arkadaslik silinirken hata",
-            res
-        );
+const removeFriend = async (friendMail: string, friendName: string) => {
+    const res = await Remove(friendMail)
+    if (res.status === 204) {
+        toast(`${friendName} arkadaşlıktan çıkarıldı!`, {
+            action: {
+                label: "Geri Al",
+                onClick: () => console.log("Geri Al butonuna basıldı"),
+            },
+        })
     } else {
-        console.log("basariyla silindi")
+        toast('BİLİNMEYEN BİR HATA MEYDANA GELDİ')
+        console.error(res)
     }
 };
 
@@ -57,11 +60,11 @@ const Options: React.FC<FriendsProps> = ({friends}) => {
                 <Tooltip>
                     <TooltipTrigger>
                         <LuUserX
-                            onClick={() => deleteFriend(friends.friend_mail)}
+                            onClick={() => removeFriend(friends.friend_mail, friends.user_name)}
                             className="text-white h-5 w-5 transition-all duration-500   opacity-70 hover:opacity-100"/>
                     </TooltipTrigger>
                     <TooltipContent>
-                        <p>Arkadaşı Sil</p>
+                        <p>Arkadaşı Çıkar</p>
                     </TooltipContent>
                 </Tooltip>
             </TooltipProvider>

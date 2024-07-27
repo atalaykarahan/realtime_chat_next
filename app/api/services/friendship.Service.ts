@@ -26,8 +26,8 @@ export const Block = async (friendMail:string) => {
     return await axios.patch("/friend/block",body)
 }
 
-// delte friend
-export const Delete = async (friendMail: string) => {
+// remove friend
+export const Remove = async (friendMail: string) => {
     const body = {
         friend_mail : friendMail
     }

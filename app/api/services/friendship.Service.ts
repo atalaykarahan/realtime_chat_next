@@ -14,8 +14,8 @@ export const Friends = async () => {
 };
 
 // get all blocked users
-export const Blockeds = async () => {
-    return await axios.get("/friend/blockeds");
+export const Blocked = async () => {
+    return await axios.get("/friend/blocked");
 }
 
 // block user

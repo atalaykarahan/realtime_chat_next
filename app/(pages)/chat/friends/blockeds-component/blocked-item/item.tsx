@@ -1,13 +1,13 @@
 "use client";
 import Image from "next/image";
 import Options from "./options";
-import { BlockedsModel } from "../blockeds";
+import { BlockedModel } from "../blocked";
 
-interface BlockedsProps {
-  blocked: BlockedsModel;
+interface BlockedProps {
+  blocked: BlockedModel;
 }
 
-const FriendItem: React.FC<BlockedsProps> = ({ blocked }) => {
+const BlockedItem: React.FC<BlockedProps> = ({ blocked }) => {
   return (
     <div onClick={() => console.log(blocked.blocked_mail, "bu userın içerdiği kutuya tıklanıldı")} className="gap-4 py-2 lg:py-2.5 px-3 mx-3 rounded-md hover:bg-[#4A32B0]/30 transition-all duration-500 cursor-pointer flex items-center">
       <div className="flex-1 flex gap-3">
@@ -40,4 +40,4 @@ const FriendItem: React.FC<BlockedsProps> = ({ blocked }) => {
   );
 };
 
-export default FriendItem;
+export default BlockedItem;

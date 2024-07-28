@@ -8,23 +8,26 @@ export const SendFriendRequest = async (email: string) => {
   return await axios.post("/request", body);
 };
 
-
+// get all friends
 export const Friends = async () => {
     return await axios.get("/friend");
 };
 
-export const Blockeds = async () => {
-    return await axios.get("/friend/blockeds");
+// get all blocked users
+export const Blocked = async () => {
+    return await axios.get("/friend/blocked");
 }
 
+// block user
 export const Block = async (friendMail:string) => {
     const body = {
         friend_mail : friendMail
     }
-    return await axios.put("/friend/block",body)
+    return await axios.patch("/friend/block",body)
 }
 
-export const Delete = async (friendMail: string) => {
+// remove friend
+export const Remove = async (friendMail: string) => {
     const body = {
         friend_mail : friendMail
     }

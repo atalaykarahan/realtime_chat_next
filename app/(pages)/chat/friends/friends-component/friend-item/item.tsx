@@ -9,7 +9,7 @@ interface FriendsProps {
 
 const FriendItem: React.FC<FriendsProps> = ({ friends }) => {
   return (
-    <div onClick={() => console.log(friends.friend_mail, "bu userın içerdiği kutuya tıklanıldı")} className="gap-4 py-2 lg:py-2.5 px-3 mx-3 rounded-md hover:bg-[#4A32B0]/30 transition-all duration-500 cursor-pointer flex items-center">
+    <div className="gap-4 py-2 lg:py-2.5 px-3 mx-3 rounded-md hover:bg-[#4A32B0]/30 transition-all duration-500 cursor-pointer flex items-center">
       <div className="flex-1 flex gap-3">
         <div className="relative inline-block">
 

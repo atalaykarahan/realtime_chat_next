@@ -1,3 +1,4 @@
+"use client";
 import {Tooltip, TooltipContent, TooltipProvider, TooltipTrigger,} from "@/components/ui/tooltip";
 import {GoBlocked} from "react-icons/go";
 import {IoChatboxEllipsesOutline} from "react-icons/io5";
@@ -6,54 +7,72 @@ import {FriendsModel} from "../friends";
 import {Block, Remove} from "@/app/api/services/friendship.Service";
 import {toast} from "sonner";
 import {checkAndGetPrivateRoom, createPrivateRoom} from "@/app/api/services/room.Service";
+import {useDispatch} from "react-redux";
+import {AppDispatch} from "@/app/redux/store";
+import {openChatBox} from "@/app/redux/slices/message-boxSlice";
 
 interface FriendsProps {
-    friends: FriendsModel;
+    friend: FriendsModel;
 }
 
-const block = async (friendMail: string, friendName: string) => {
-    const res = await Block(friendMail)
-    if (res.status === 200) {
-        toast(`${friendName} BAŞARIYLA ENGELLENDİ`, {
-            action: {
-                label: "Geri Al",
-                onClick: () => console.log("Geri Al butonuna basıldı"),
-            },
-        })
-    } else {
-        toast('BİLİNMEYEN BİR HATA MEYDANA GELDİ')
-        console.error(res)
+const Options: React.FC<FriendsProps> = ({friend}) => {
+    const dispatch = useDispatch<AppDispatch>();
+
+    const block = async (friendMail: string, friendName: string) => {
+        const res = await Block(friendMail)
+        if (res.status === 200) {
+            toast(`${friendName} BAŞARIYLA ENGELLENDİ`, {
+                action: {
+                    label: "Geri Al",
+                    onClick: () => console.log("Geri Al butonuna basıldı"),
+                },
+            })
+        } else {
+            toast('BİLİNMEYEN BİR HATA MEYDANA GELDİ')
+            console.error(res)
+        }
+    };
+
+    const removeFriend = async (friendMail: string, friendName: string) => {
+        const res = await Remove(friendMail)
+        if (res.status === 204) {
+            toast(`${friendName} arkadaşlıktan çıkarıldı!`, {
+                action: {
+                    label: "Geri Al",
+                    onClick: () => console.log("Geri Al butonuna basıldı"),
+                },
+            })
+        } else {
+            toast('BİLİNMEYEN BİR HATA MEYDANA GELDİ')
+            console.error(res)
+        }
+    };
+
+    const openChatBoxHandler = async (friendMail: string) => {
+        const res = await checkAndGetPrivateRoom(friendMail);
+        if (res.status === 200) {
+            dispatch(openChatBox({
+                chatBoxStatus: true,
+                other_user_email: friendMail,
+                other_user_name: friend.user_name,
+                other_user_photo: friend.user_photo
+            }))
+        } else {
+            toast('BİLİNMEYEN BİR HATA MEYDANA GELDİ')
+            console.error(res)
+        }
+
+
     }
-};
 
-const removeFriend = async (friendMail: string, friendName: string) => {
-    const res = await Remove(friendMail)
-    if (res.status === 204) {
-        toast(`${friendName} arkadaşlıktan çıkarıldı!`, {
-            action: {
-                label: "Geri Al",
-                onClick: () => console.log("Geri Al butonuna basıldı"),
-            },
-        })
-    } else {
-        toast('BİLİNMEYEN BİR HATA MEYDANA GELDİ')
-        console.error(res)
-    }
-};
 
-const openChatBox = async (friendMail: string) => {
-    const res = await checkAndGetPrivateRoom(friendMail);
-    console.log(res);
-}
-
-const Options: React.FC<FriendsProps> = ({friends}) => {
     return (
         <>
             <TooltipProvider>
                 <Tooltip>
                     <TooltipTrigger>
                         <GoBlocked
-                            onClick={() => block(friends.friend_mail, friends.user_name)}
+                            onClick={() => block(friend.friend_mail, friend.user_name)}
                             className="text-rose-600 h-5 w-5 transition-all duration-500   opacity-70 hover:opacity-100"/>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -65,7 +84,7 @@ const Options: React.FC<FriendsProps> = ({friends}) => {
                 <Tooltip>
                     <TooltipTrigger>
                         <LuUserX
-                            onClick={() => removeFriend(friends.friend_mail, friends.user_name)}
+                            onClick={() => removeFriend(friend.friend_mail, friend.user_name)}
                             className="text-white h-5 w-5 transition-all duration-500   opacity-70 hover:opacity-100"/>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -77,7 +96,7 @@ const Options: React.FC<FriendsProps> = ({friends}) => {
                 <Tooltip>
                     <TooltipTrigger>
                         <IoChatboxEllipsesOutline
-                            onClick={() => openChatBox(friends.friend_mail)}
+                            onClick={() => openChatBoxHandler(friend.friend_mail)}
                             className="text-white transition-all duration-500 h-5 w-5  opacity-70 hover:opacity-100"/>
                     </TooltipTrigger>
                     <TooltipContent>

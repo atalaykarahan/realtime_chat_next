@@ -1,16 +1,16 @@
 import { Message } from "@/models/Message";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
-interface  MessageItemModel {
+export interface  MessageItemSliceModel {
   chatBoxStatus: boolean;
   other_user_email: string;
   other_user_name: string;
   other_user_photo: string;
-  messages: Message[];
+  messages?: Message[];
 }
 
 interface InitialState {
-  value: MessageItemModel;
+  value: MessageItemSliceModel;
 }
 
 export const messageBox = createSlice({
@@ -21,11 +21,11 @@ export const messageBox = createSlice({
       other_user_email: "",
       other_user_name: "",
       other_user_photo: "",
-      messages: [],
-    } as MessageItemModel,
+      // messages: [],
+    } as MessageItemSliceModel,
   } as InitialState,
   reducers: {
-    openChatBox: (state, action: PayloadAction<MessageItemModel>) => {
+    openChatBox: (state, action: PayloadAction<MessageItemSliceModel>) => {
       state.value = action.payload;
     },
   },

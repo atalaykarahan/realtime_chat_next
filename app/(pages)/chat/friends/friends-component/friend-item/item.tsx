@@ -35,7 +35,7 @@ const FriendItem: React.FC<FriendsProps> = ({ friends }) => {
                 </div>
             </div>
             <div className="flex-none flex items-center justify-center  gap-2 ml-auto lg:ml-0">
-                <Options friends={friends}/>
+                <Options friend={friends}/>
             </div>
         </div>
     );

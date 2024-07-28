@@ -5,7 +5,7 @@ import {LuUserX} from "react-icons/lu";
 import {FriendsModel} from "../friends";
 import {Block, Remove} from "@/app/api/services/friendship.Service";
 import {toast} from "sonner";
-import {createPrivateRoom} from "@/app/api/services/room.Service";
+import {checkAndGetPrivateRoom, createPrivateRoom} from "@/app/api/services/room.Service";
 
 interface FriendsProps {
     friends: FriendsModel;
@@ -41,8 +41,8 @@ const removeFriend = async (friendMail: string, friendName: string) => {
     }
 };
 
-const sendMessage = async (friendMail: string) => {
-    const res = await createPrivateRoom(friendMail);
+const openChatBox = async (friendMail: string) => {
+    const res = await checkAndGetPrivateRoom(friendMail);
     console.log(res);
 }
 
@@ -77,7 +77,7 @@ const Options: React.FC<FriendsProps> = ({friends}) => {
                 <Tooltip>
                     <TooltipTrigger>
                         <IoChatboxEllipsesOutline
-                            onClick={() => sendMessage(friends.friend_mail)}
+                            onClick={() => openChatBox(friends.friend_mail)}
                             className="text-white transition-all duration-500 h-5 w-5  opacity-70 hover:opacity-100"/>
                     </TooltipTrigger>
                     <TooltipContent>

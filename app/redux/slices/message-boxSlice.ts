@@ -6,6 +6,7 @@ export interface MessageItemSliceModel {
     other_user_email: string;
     other_user_name: string;
     other_user_photo: string;
+    room_id: string;
     messages?: Message[];
 }
 
@@ -21,6 +22,7 @@ export const messageBox = createSlice({
             other_user_email: "",
             other_user_name: "",
             other_user_photo: "",
+            room_id: "",
             messages: [],
         } as MessageItemSliceModel,
     } as InitialState,

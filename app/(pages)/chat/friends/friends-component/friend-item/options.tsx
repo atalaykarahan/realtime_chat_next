@@ -55,7 +55,8 @@ const Options: React.FC<FriendsProps> = ({friend}) => {
                 chatBoxStatus: true,
                 other_user_email: friendMail,
                 other_user_name: friend.user_name,
-                other_user_photo: friend.user_photo
+                other_user_photo: friend.user_photo,
+                room_id: res.data.room_id
             }))
         } else {
             toast('BİLİNMEYEN BİR HATA MEYDANA GELDİ')

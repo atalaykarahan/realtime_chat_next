@@ -17,30 +17,30 @@ interface ChatBoxProps {
 }
 
 const ChatBox: React.FC<ChatBoxProps> = ({ user, messages, socket }) => {
-  const [oldMessages, setOldMessages] = useState<Message[]>([]);
+  // const [oldMessages, setOldMessages] = useState<Message[]>([]);
   const chatBoxValue = useAppSelector((state) => state.messageBoxReducer.value);
 
   useEffect(() => {
-    if (user && user.id)
-      oldSpeech("115849378656249115607", "115943935417963963678");
+    // if (user && user.id)
+      // oldSpeech("115849378656249115607", "115943935417963963678");
   }, []);
 
   //#region OLD SPEECH
-  const oldSpeech = async (sender_id: string, receiver_id: string) => {
-    try {
-      const res = await PostPrivateConversation(sender_id, receiver_id);
-
-      if (res.status !== 200) {
-        console.error("Mesaj ile ilgili bir sorun oluştu", res);
-      }
-
-      console.warn(res.data.data);
-
-      setOldMessages(res.data.data);
-    } catch (error) {
-      console.error("hata oldu mesajlar gelemedi ", error);
-    }
-  };
+  // const oldSpeech = async (sender_id: string, receiver_id: string) => {
+  //   try {
+  //     const res = await PostPrivateConversation(sender_id, receiver_id);
+  //
+  //     if (res.status !== 200) {
+  //       console.error("Mesaj ile ilgili bir sorun oluştu", res);
+  //     }
+  //
+  //     console.warn(res.data.data);
+  //
+  //     setOldMessages(res.data.data);
+  //   } catch (error) {
+  //     console.error("hata oldu mesajlar gelemedi ", error);
+  //   }
+  // };
   //#endregion
 
   return (
@@ -51,10 +51,10 @@ const ChatBox: React.FC<ChatBoxProps> = ({ user, messages, socket }) => {
         chatBoxValue.chatBoxStatus == true ? "flex" : "hidden"
       )}
     >
-      <ChatNavbar />
+      <ChatNavbar friend={chatBoxValue} />
 
       {/* New Chat Message */}
-      <Speech user={user} messages={chatBoxValue.messages} />
+      {/*<Speech user={user} messages={chatBoxValue.messages} />*/}
       {/* <Speech user={user} messages={oldMessages} /> */}
       {/* <Speech user={user} messages={messages} /> */}
 

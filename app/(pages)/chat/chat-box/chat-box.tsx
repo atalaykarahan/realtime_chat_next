@@ -29,7 +29,7 @@ const ChatBox: React.FC<ChatBoxProps> = ({user,socket, chatBoxValue}) => {
         if (user && user.id && socket) {     
           //gecmis mesajlar basarili bir sekilde dondukten sonra socket'e baglaniyor eger gecmis mesajlar gelmez ise baglanmaz!!
           history().then(() => {
-                newSocket.on(chatBoxValue.room_id, (newMessage: Message) => {
+              socket.on(chatBoxValue.room_id, (newMessage: Message) => {
                     setMessages((prevMessages) => [...prevMessages, newMessage]);
                 });
             });

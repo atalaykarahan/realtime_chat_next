@@ -14,3 +14,10 @@ import axios from "../axios";
 // export const GetConversation = async () => {
 //   return await axios.get("/message/conversation");
 // };
+
+export const getHistoryByRoomId = async (room_id: string) => {
+    const body = {
+        room_id: room_id
+    }
+    return await axios.post("/message/history", body);
+}

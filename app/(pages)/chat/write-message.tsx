@@ -5,6 +5,7 @@ import {Input} from "@/components/ui/input";
 import {AiOutlineSend} from "react-icons/ai";
 import {Socket} from "socket.io-client";
 import React, {useState} from "react";
+import { PlaceholdersAndVanishInput } from "@/components/ui/placeholders-and-vanish-input";
 
 interface WriteMessageProps {
     user: any;
@@ -38,6 +39,24 @@ const WriteMessage: React.FC<WriteMessageProps> = ({user, socket, room_id}) => {
         }
     };
 
+    const placeholders = [
+        "Mesajınızı buraya yazın...",
+        "Merhaba, nasılsınız?",
+        "Dün akşamki film harikaydı!",
+        "Sohbete katılın...",
+        "Yeni projeyle ilgili düşüncelerim var.",
+        "Bir şeyler yazmak ister misiniz?",
+      ];
+
+      const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        console.log(e.target.value);
+      };
+
+      const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+        console.log("submitted");
+        handleSendMessage()
+      };
     return (
         <Disclosure as="nav" className="border-t border-[#5C6B81]">
             {({open}) => (
@@ -48,17 +67,22 @@ const WriteMessage: React.FC<WriteMessageProps> = ({user, socket, room_id}) => {
                                 <LuPlusCircle className="text-[#4A32B0] text-[2rem]"/>
                             </div>
                             <div className="w-full">
-                                <Input
+                                {/* <Input
                                     type="text"
                                     placeholder="Type your message..."
                                     value={newMessage}
                                     onChange={(e) => setNewMessage(e.target.value)}
                                     onKeyDown={handleKeyDown}
+                                /> */}
+                                 <PlaceholdersAndVanishInput
+                                    placeholders={placeholders}
+                                    onChange={(e) => setNewMessage(e.target.value)}
+                                    onSubmit={onSubmit}
                                 />
                             </div>
-                            <div onClick={handleSendMessage}>
+                            {/* <div onClick={handleSendMessage}>
                                 <AiOutlineSend className="text-[#4A32B0] text-[2rem]"/>
-                            </div>
+                            </div> */}
                         </div>
                     </div>
                 </>

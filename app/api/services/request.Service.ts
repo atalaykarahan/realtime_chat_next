@@ -7,7 +7,7 @@ export const ComingRequests = async () => {
 
 export const UpdateFriendshipRequest = async (senderMail: string, status: RequestStatus) => {
     const body = {
-        sender_mail: senderMail,
+        mail: senderMail,
         status: status,
     }
     return await axios.patch("/request", body)
@@ -15,7 +15,7 @@ export const UpdateFriendshipRequest = async (senderMail: string, status: Reques
 
 export const SendFriendRequest = async (email: string) => {
     const body = {
-        receiver_mail: email,
+        mail: email,
     };
     return await axios.post("/request", body);
 };

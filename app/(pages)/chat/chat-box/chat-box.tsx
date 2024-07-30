@@ -14,46 +14,33 @@ import {toast} from "sonner";
 
 interface ChatBoxProps {
     user: any;
+    socket: Socket | null;
     chatBoxValue: MessageItemSliceModel;
 }
 
-const ChatBox: React.FC<ChatBoxProps> = ({user, chatBoxValue}) => {
-    const [connectionStatus, setConnectionStatus] =
-        useState<string>("Bağlanıyor...");
-    const [socket, setSocket] = useState<Socket | null>(null);
+const ChatBox: React.FC<ChatBoxProps> = ({user,socket, chatBoxValue}) => {
+   
     const [messages, setMessages] = useState<Message[]>([]);
-    const socketUrl = process.env.SOCKET_IO_URL;
     useEffect(() => {
-        setMessages([]); //ekran her degistiginde gecmis mesajlar silmek icin
+        
         //#region OLD MESSAGES & LIVE CHAT
-        const newSocket = io(socketUrl as string, {
-            transports: ["websocket", "polling"],
-        });
+       setMessages([]); //ekran her degistiginde gecmis mesajlar silmek icin
 
-        newSocket.on("connect", () => {
-            setConnectionStatus("Bağlandı");
-        });
-        newSocket.on("disconnect", () => {
-            setConnectionStatus("Bağlanamadı");
-        });
-        newSocket.on("connect_error", (error) => {
-            setConnectionStatus(`Bağlantı Hatası: ${error.message}`);
-        });
-
-        //gecmis mesajlar basarili bir sekilde dondukten sonra socket'e baglaniyor eger gecmis mesajlar gelmez ise baglanmaz!!
-        if (user && user.id) {
-            history().then(() => {
+        if (user && user.id && socket) {     
+          //gecmis mesajlar basarili bir sekilde dondukten sonra socket'e baglaniyor eger gecmis mesajlar gelmez ise baglanmaz!!
+          history().then(() => {
                 newSocket.on(chatBoxValue.room_id, (newMessage: Message) => {
                     setMessages((prevMessages) => [...prevMessages, newMessage]);
                 });
             });
+      
+          return () => {
+            if (socket) socket.close();
+          };
         }
-        setSocket(newSocket);
-        return () => {
-            if (newSocket) newSocket.close();
-        };
         //#endregion
-    }, [chatBoxValue.room_id]);
+      }, [chatBoxValue.room_id]);
+
 
     // gecmis mesajlari getiren func
     const history = async () => {
@@ -74,7 +61,7 @@ const ChatBox: React.FC<ChatBoxProps> = ({user, chatBoxValue}) => {
                 chatBoxValue.chatBoxStatus == true ? "flex" : "hidden"
             )}
         >
-            <ConnectionStatus statusTitle={connectionStatus}/>
+            {/* <ConnectionStatus statusTitle={connectionStatus}/> */}
             <ChatNavbar friend={chatBoxValue}/>
 
             {/* Chat Message */}

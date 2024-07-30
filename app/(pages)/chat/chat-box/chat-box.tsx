@@ -9,6 +9,8 @@ import io, {Socket} from "socket.io-client";
 import {cn} from "@/lib/utils";
 import {MessageItemSliceModel} from "@/app/redux/slices/message-boxSlice";
 import ConnectionStatus from "@/components/connection-status";
+import {getHistoryByRoomId} from "@/app/api/services/message.Service";
+import {toast} from "sonner";
 
 interface ChatBoxProps {
     user: any;
@@ -20,34 +22,36 @@ const ChatBox: React.FC<ChatBoxProps> = ({user,socket, chatBoxValue}) => {
    
     const [messages, setMessages] = useState<Message[]>([]);
     useEffect(() => {
-        if (user && user.id && socket) {
-          socket.on(chatBoxValue.room_id, (newMessage: Message) => {
-            setMessages((prevMessages) => [...prevMessages, newMessage]);
-          });
+        
+        //#region OLD MESSAGES & LIVE CHAT
+       setMessages([]); //ekran her degistiginde gecmis mesajlar silmek icin
+
+        if (user && user.id && socket) {     
+          //gecmis mesajlar basarili bir sekilde dondukten sonra socket'e baglaniyor eger gecmis mesajlar gelmez ise baglanmaz!!
+          history().then(() => {
+                newSocket.on(chatBoxValue.room_id, (newMessage: Message) => {
+                    setMessages((prevMessages) => [...prevMessages, newMessage]);
+                });
+            });
       
           return () => {
-            socket.off(chatBoxValue.room_id);
+            if (socket) socket.close();
           };
         }
-      }, [chatBoxValue.room_id, user, socket]);
+        //#endregion
+      }, [chatBoxValue.room_id]);
 
-    //#region OLD SPEECH
-    // const oldSpeech = async (sender_id: string, receiver_id: string) => {
-    //   try {
-    //     const res = await PostPrivateConversation(sender_id, receiver_id);
-    //
-    //     if (res.status !== 200) {
-    //       console.error("Mesaj ile ilgili bir sorun oluştu", res);
-    //     }
-    //
-    //     console.warn(res.data.data);
-    //
-    //     setOldMessages(res.data.data);
-    //   } catch (error) {
-    //     console.error("hata oldu mesajlar gelemedi ", error);
-    //   }
-    // };
-    //#endregion
+
+    // gecmis mesajlari getiren func
+    const history = async () => {
+        const res = await getHistoryByRoomId(chatBoxValue.room_id);
+        if (res.status === 200) {
+            setMessages(res.data);
+        } else {
+            toast('ESKİ MESAJLAR GETİRİLİRKEN BİLİNMEYEN BİR HATA MEYDANA GELDİ')
+            console.error(res)
+        }
+    }
 
     return (
         //duruma göre hidden kodu olucak

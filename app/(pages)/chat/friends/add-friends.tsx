@@ -11,8 +11,13 @@ import {useState} from "react";
 import {useForm} from "react-hook-form";
 import {z} from "zod";
 import {SendFriendRequest} from "@/app/api/services/request.Service";
+import io, {Socket} from "socket.io-client";
 
-const AddFriend = () => {
+interface AddFriendProps {
+    socket: Socket | null;
+}
+
+const AddFriend: React.FC<AddFriendProps> = ({socket}) => {
     const [errorMessage, setErrorMessage] = useState("");
 
     const form = useForm<z.infer<typeof AddFriendSchemas>>({
@@ -23,20 +28,25 @@ const AddFriend = () => {
     });
 
     const onSubmit = async (values: z.infer<typeof AddFriendSchemas>) => {
-        const res = await SendFriendRequest(values.email);
-        if (res.status === 201) {
-            console.log("arkadas eklendi buraya bir toaster ve inputu temizle");
-            toast("Arkadaşlık isteği başarıyla gönderildi", {
-                description: `${values.email} adli kişiye isteğiniz gönderildi.`,
-                action: {
-                    label: "Geri Al",
-                    onClick: () => console.log("İptal etme butonuna basıldı"),
-                },
-            })
-            form.reset({email: ""});
-        } else {
-            console.error("arkadas eklenirken bir sorun olustu", res);
+        let email = values.email
+        console.log(socket)
+        if (socket) {
+            socket.emit("sendFriend", email);
         }
+        // const res = await SendFriendRequest(values.email);
+        // if (res.status === 201) {
+        //     console.log("arkadas eklendi buraya bir toaster ve inputu temizle");
+        //     toast("Arkadaşlık isteği başarıyla gönderildi", {
+        //         description: `${values.email} adli kişiye isteğiniz gönderildi.`,
+        //         action: {
+        //             label: "Geri Al",
+        //             onClick: () => console.log("İptal etme butonuna basıldı"),
+        //         },
+        //     })
+        //     form.reset({email: ""});
+        // } else {
+        //     console.error("arkadas eklenirken bir sorun olustu", res);
+        // }
 
     };
 
@@ -58,7 +68,7 @@ const AddFriend = () => {
                                         <Search
                                             {...field}
                                             id="email"
-                                            placeholder="Kullanıcı Adı & E-Posta"
+                                            placeholder="E-Posta"
                                         />
                                     </FormControl>
                                     <FormMessage/>

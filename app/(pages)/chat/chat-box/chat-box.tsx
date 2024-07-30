@@ -12,56 +12,24 @@ import ConnectionStatus from "@/components/connection-status";
 
 interface ChatBoxProps {
     user: any;
+    socket: Socket | null;
     chatBoxValue: MessageItemSliceModel;
 }
 
-const ChatBox: React.FC<ChatBoxProps> = ({user, chatBoxValue}) => {
-    const [connectionStatus, setConnectionStatus] =
-        useState<string>("Bağlanıyor...");
-    const [socket, setSocket] = useState<Socket | null>(null);
+const ChatBox: React.FC<ChatBoxProps> = ({user,socket, chatBoxValue}) => {
+   
     const [messages, setMessages] = useState<Message[]>([]);
-    const socketUrl = process.env.SOCKET_IO_URL;
     useEffect(() => {
-        //#region LIVE CHAT
-        const newSocket = io(socketUrl as string, {
-            transports: ["websocket", "polling"],
-        });
-
-        newSocket.on("connect", () => {
-            setConnectionStatus("Bağlandı");
-        });
-        newSocket.on("disconnect", () => {
-            setConnectionStatus("Bağlanamadı");
-        });
-        newSocket.on("connect_error", (error) => {
-            setConnectionStatus(`Bağlantı Hatası: ${error.message}`);
-        });
-
-        //kullanici chat roomunu dinlemeli
-        if (user && user.id) {
-            //odayi dinlemeleri icin once odaya girmeleri gerekir.
-            // newSocket.emit('joinRoom', 'chat_list');
-
-            newSocket.on(chatBoxValue.room_id, (newMessage: Message) => {
-                setMessages((prevMessages) => [...prevMessages, newMessage]);
-            });
-
-            // newSocket.emit('joinRoom', 'chat_list');
-            //
-            // newSocket.on(user.id, (newMessage: Message) => {
-            //     setMessages((prevMessages) => [...prevMessages, newMessage]);
-            // });
-
+        if (user && user.id && socket) {
+          socket.on(chatBoxValue.room_id, (newMessage: Message) => {
+            setMessages((prevMessages) => [...prevMessages, newMessage]);
+          });
+      
+          return () => {
+            socket.off(chatBoxValue.room_id);
+          };
         }
-
-        setSocket(newSocket);
-        return () => {
-            if (newSocket) newSocket.close();
-        };
-        //#endregion
-
-
-    }, [chatBoxValue.room_id]);
+      }, [chatBoxValue.room_id, user, socket]);
 
     //#region OLD SPEECH
     // const oldSpeech = async (sender_id: string, receiver_id: string) => {
@@ -89,7 +57,7 @@ const ChatBox: React.FC<ChatBoxProps> = ({user, chatBoxValue}) => {
                 chatBoxValue.chatBoxStatus == true ? "flex" : "hidden"
             )}
         >
-            <ConnectionStatus statusTitle={connectionStatus}/>
+            {/* <ConnectionStatus statusTitle={connectionStatus}/> */}
             <ChatNavbar friend={chatBoxValue}/>
 
             {/* Chat Message */}

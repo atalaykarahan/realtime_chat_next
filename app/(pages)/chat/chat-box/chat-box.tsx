@@ -40,10 +40,18 @@ const ChatBox: React.FC<ChatBoxProps> = ({user, chatBoxValue}) => {
         //kullanici chat roomunu dinlemeli
         if (user && user.id) {
             //odayi dinlemeleri icin once odaya girmeleri gerekir.
-            newSocket.emit('joinRoom', chatBoxValue.room_id);
-            newSocket.on('message', (newMessage: Message) => {
+            // newSocket.emit('joinRoom', 'chat_list');
+
+            newSocket.on(chatBoxValue.room_id, (newMessage: Message) => {
                 setMessages((prevMessages) => [...prevMessages, newMessage]);
             });
+
+            // newSocket.emit('joinRoom', 'chat_list');
+            //
+            // newSocket.on(user.id, (newMessage: Message) => {
+            //     setMessages((prevMessages) => [...prevMessages, newMessage]);
+            // });
+
         }
 
         setSocket(newSocket);

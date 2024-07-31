@@ -56,6 +56,7 @@ const RightBubble: React.FC<RightBubbleProps> = ({
                                 src={user?.image}
                                 alt="/images/avatar/avatar-2.jpg"
                                 className="block w-full h-full object-cover rounded-full"
+                                loading="eager"
                             />
                         </div>
                     </div>

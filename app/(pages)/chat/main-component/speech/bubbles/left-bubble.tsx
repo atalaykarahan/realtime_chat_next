@@ -27,6 +27,7 @@ const LeftBubble: React.FC<LeftBubbleProps> = ({
                                 src={user?.image}
                                 alt="/images/avatar/avatar-1.jpg"
                                 className="block w-full h-full object-cover rounded-full"
+                                loading="eager"
                             />
                         </div>
                     </div>

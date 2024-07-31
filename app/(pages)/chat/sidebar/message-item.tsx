@@ -36,6 +36,7 @@ const MessageItem: React.FC<MessageItemProps> = ({message}) => {
                     "https://dash-tail.vercel.app/_next/static/media/avatar-2.1136fd53.jpg"
                 }
                 alt="tst"
+                loading="eager"
             />
           </span>
                     <div

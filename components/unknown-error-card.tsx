@@ -11,6 +11,7 @@ const UnknownErrorCard = () => {
           width={50}
           height={50}
           className="w-[200px] mx-auto"
+          loading="eager"
         />
         <p className="text-white text-2xl pt-10 font-medium">
           Bilinmeyen bir hata ile karşılaşıldı.

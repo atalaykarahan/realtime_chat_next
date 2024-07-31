@@ -7,13 +7,6 @@ import {LuInfo, LuPhone} from "react-icons/lu";
 import {HiOutlineDotsVertical} from "react-icons/hi";
 import {MessageItemSliceModel} from "@/app/redux/slices/message-boxSlice";
 
-const navigation = [
-    {name: "Dashboard", href: "#", current: true},
-    {name: "Team", href: "#", current: false},
-    {name: "Projects", href: "#", current: false},
-    {name: "Calendar", href: "#", current: false},
-];
-
 interface ChatNavbarProps {
     friend: MessageItemSliceModel;
 }
@@ -38,6 +31,7 @@ const ChatNavbar: React.FC<ChatNavbarProps> = ({friend}) => {
                               className="aspect-square h-full w-full"
                               src={friend.other_user_photo ?? "https://dash-tail.vercel.app/_next/static/media/avatar-2.1136fd53.jpg"}
                               alt="tst"
+                              loading="eager"
                           />
                         </span>
                                                 <div

@@ -37,15 +37,12 @@ const AddFriend = () => {
         } else {
             console.error("arkadas eklenirken bir sorun olustu", res);
         }
-
     };
-
     return (
         <Disclosure as="nav" className="border-b border-[#5C6B81]">
             <div className="relative  px-5 flex h-20 items-center justify-between gap-5">
                 <Form {...form}>
                     <form
-                        {...form}
                         className="w-full flex gap-5"
                         onSubmit={form.handleSubmit(onSubmit)}
                     >
@@ -66,7 +63,6 @@ const AddFriend = () => {
                             )}
                         />
                         <FormError className="mb-3" message={errorMessage}/>
-
                         <Button
                             type="submit"
                             className="bg-[#4A32B0] border-none  hover:bg-[#4A32B0] hover:text-white text-white"

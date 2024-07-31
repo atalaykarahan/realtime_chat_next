@@ -15,9 +15,13 @@ import axios from "../axios";
 //   return await axios.get("/message/conversation");
 // };
 
-export const getHistoryByRoomId = async (room_id: string) => {
+export const getChatHistoryByRoomId = async (room_id: string) => {
     const body = {
         room_id: room_id
     }
-    return await axios.post("/message/history", body);
+    return await axios.post("/message/chat/history", body);
+}
+
+export const getChatListHistory = async () => {
+    return await axios.get("/message/chat_list/history");
 }

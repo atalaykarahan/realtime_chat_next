@@ -3,7 +3,7 @@ import {Tooltip, TooltipContent, TooltipProvider, TooltipTrigger,} from "@/compo
 import {Remove} from "@/app/api/services/friendship.Service";
 import {CgUnblock} from "react-icons/cg";
 import {toast} from "sonner";
-import {BlockedModel} from "@/app/(pages)/chat/friends/blockeds-component/blocked";
+import {BlockedModel} from "@/app/(pages)/chat/main-component/friends/blockeds-component/blocked";
 
 interface BlockedsProps {
     blocked: BlockedModel;

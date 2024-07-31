@@ -12,6 +12,7 @@ const nextConfig = {
             "i.hizliresim.com",
         ],
     },
+    reactStrictMode: true,
 };
 
 export default nextConfig;

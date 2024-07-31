@@ -74,7 +74,7 @@ const ChatBox: React.FC<ChatBoxProps> = ({user, chatBoxValue}) => {
                 <ChatNavbar friend={chatBoxValue}/>
 
                 {/* Chat Message */}
-                <Speech user={user} messages={messages}/>
+                <Speech room_id={chatBoxValue.room_id} user={user} messages={messages}/>
 
                 {/* write new message section */}
                 <div className="mt-auto">

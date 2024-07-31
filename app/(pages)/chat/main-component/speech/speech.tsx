@@ -7,24 +7,25 @@ import {useEffect, useRef, useState} from "react";
 interface SpeechProps {
     user: any;
     messages: Message[];
+    room_id: string;
 }
 
-const Speech: React.FC<SpeechProps> = ({user, messages}) => {
+const Speech: React.FC<SpeechProps> = ({user, messages, room_id}) => {
     const endOfMessagesRef = useRef<HTMLDivElement | null>(null);
-    const [isInitialLoad, setIsInitialLoad] = useState(true);
+    const [oldRoomId, setOldRoomId] = useState<string>("");
+
     useEffect(() => {
         // Mesajlar güncellendiğinde sayfanın en altına kaydır
-        if (isInitialLoad) {
-            // İlk yüklemede en alt kısma git
-            endOfMessagesRef.current?.scrollIntoView({ behavior: 'auto' });
-            setIsInitialLoad(false);
-        }
-        else {
-            // Mesajlar güncellendiğinde pürüzsüz kaydırma
-            endOfMessagesRef.current?.scrollIntoView({ behavior: 'smooth' });
+        if (room_id !== "" && room_id !== oldRoomId && messages.length) {
+            endOfMessagesRef.current?.scrollIntoView({behavior: 'auto'});
+            setOldRoomId(room_id);
+        } else if (messages.length) {
+            endOfMessagesRef.current?.scrollIntoView({behavior: 'smooth'});
         }
 
     }, [messages]);
+
+
     return (
         <ScrollArea className="rounded-md">
             <div className="mt-3 p-6 pt-0 relative flex-1 overflow-y-auto">

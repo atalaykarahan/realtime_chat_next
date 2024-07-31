@@ -1,8 +1,7 @@
 "use client";
-import {GetConversation} from "@/app/api/services/Message.Service";
+import {getChatListHistory} from "@/app/api/services/message.Service";
 import CustomCard from "@/components/custom-card";
 import {ScrollArea} from "@/components/ui/scroll-area";
-import {Message} from "@/models/Message";
 import {useEffect, useState} from "react";
 import UserProfile from "../user-profile/user-profile";
 import MessageItem from "./message-item";
@@ -10,32 +9,27 @@ import MessageItem from "./message-item";
 interface SidebarProps {
     user: any;
 }
-
 export interface MessageItemModel {
-    other_user_email: string;
-    other_user_name: string;
-    other_user_photo: string;
-    messages: Message[];
+    room_id: string;
+    last_message: string;
+    updatedAt: Date;
+    user_name: string;
+    user_photo: string;
+    user_email: string;
 }
 
 const Sidebar: React.FC<SidebarProps> = ({user}) => {
-    const [messages, setMessages] = useState<MessageItemModel[]>();
+    const [listMessages, setListMessages] = useState<MessageItemModel[]>();
 
     useEffect(() => {
         fetchData();
     }, []);
 
     const fetchData = async () => {
-        // const res = await GetConversation();
-
-        // if (res.status !== 200) {
-        //   console.error(
-        //     "geçmiş mesajları getirmekle ilgili bir sorun oluştu ",
-        //     res
-        //   );
-        // }
-
-        // setMessages(res.data);
+        const res = await getChatListHistory();
+        if (res.status === 200) {
+            setListMessages(res.data);
+        }
     };
 
     return (
@@ -43,8 +37,8 @@ const Sidebar: React.FC<SidebarProps> = ({user}) => {
             <UserProfile user={user}/>
             <ScrollArea className="flex-1 rounded-md overflow-auto">
                 <div className="pt-3">
-                    {messages?.map((msg) => (
-                        <MessageItem message={msg} key={msg.other_user_email}/>
+                    {listMessages?.map((msg) => (
+                        <MessageItem message={msg} key={msg.room_id}/>
                     ))}
                 </div>
             </ScrollArea>

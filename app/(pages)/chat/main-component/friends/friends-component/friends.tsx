@@ -30,6 +30,9 @@ const FriendsComponent = () => {
 
     return (
         <CustomCard className="bg-transparent rounded-md border border-[#5C6B81] flex-1 flex flex-col justify-between">
+           <span className="border-b border-[#5C6B81] text-white pl-4 py-2">
+        Engellenenler
+      </span>
             <ScrollArea className="h-[81dvh] rounded-md">
                 <div className="mt-3 p-6 pt-0 relative">
                     {friends?.map((reqs) => (

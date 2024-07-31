@@ -2,10 +2,10 @@ import axios from "../axios";
 
 
 export const SendFriendRequest = async (email: string) => {
-  const body = {
-    receiver_mail: email,
-  };
-  return await axios.post("/request", body);
+    const body = {
+        receiver_mail: email,
+    };
+    return await axios.post("/request", body);
 };
 
 // get all friends
@@ -19,17 +19,17 @@ export const Blocked = async () => {
 }
 
 // block user
-export const Block = async (friendMail:string) => {
+export const Block = async (friendMail: string) => {
     const body = {
-        friend_mail : friendMail
+        friend_mail: friendMail
     }
-    return await axios.patch("/friend/block",body)
+    return await axios.patch("/friend/block", body)
 }
 
 // remove friend
 export const Remove = async (friendMail: string) => {
     const body = {
-        friend_mail : friendMail
+        friend_mail: friendMail
     }
     return await axios.delete("/friend", {
         data: body

@@ -12,7 +12,11 @@ import {useForm} from "react-hook-form";
 import {z} from "zod";
 import {SendFriendRequest} from "@/app/api/services/request.Service";
 
-const AddFriend = () => {
+interface AddFriendProps {
+    className?: string;
+}
+
+const AddFriend = ({className}: AddFriendProps) => {
     const [errorMessage, setErrorMessage] = useState("");
 
     const form = useForm<z.infer<typeof AddFriendSchemas>>({
@@ -40,39 +44,46 @@ const AddFriend = () => {
     };
     return (
         <Disclosure as="nav" className="border-b border-[#5C6B81]">
-            <div className="relative  px-5 flex h-20 items-center justify-between gap-5">
-                <Form {...form}>
-                    <form
-                        className="w-full flex gap-5"
-                        onSubmit={form.handleSubmit(onSubmit)}
-                    >
-                        <FormField
-                            control={form.control}
-                            name="email"
-                            render={({field}) => (
-                                <FormItem className="w-full">
-                                    <FormControl>
-                                        <Search
-                                            {...field}
-                                            id="email"
-                                            placeholder="Kullanıcı Adı & E-Posta"
-                                        />
-                                    </FormControl>
-                                    <FormMessage/>
-                                </FormItem>
-                            )}
-                        />
-                        <FormError className="mb-3" message={errorMessage}/>
-                        <Button
-                            type="submit"
-                            className="bg-[#4A32B0] border-none  hover:bg-[#4A32B0] hover:text-white text-white"
-                            variant={"outline"}
-                        >
-                            Gönder
-                        </Button>
-                    </form>
-                </Form>
-            </div>
+            {({open}) => (
+                <>
+                    <div>
+                        <div className="relative px-5 flex h-20 items-center justify-between">
+                            <Form {...form}>
+                                <form
+                                    className="w-full flex gap-5"
+                                    onSubmit={form.handleSubmit(onSubmit)}
+                                >
+                                    <FormField
+                                        control={form.control}
+                                        name="email"
+                                        render={({field}) => (
+                                            <FormItem className="w-full">
+                                                <FormControl>
+                                                    <Search
+                                                        {...field}
+                                                        id="email"
+                                                        placeholder="Kullanıcı Adı & E-Posta"
+                                                    />
+                                                </FormControl>
+                                                <FormMessage/>
+                                            </FormItem>
+                                        )}
+                                    />
+                                    <FormError className="mb-3" message={errorMessage}/>
+                                    <Button
+                                        type="submit"
+                                        className="bg-[#4A32B0] border-none  hover:bg-[#4A32B0] hover:text-white text-white"
+                                        variant={"outline"}
+                                    >
+                                        Gönder
+                                    </Button>
+                                </form>
+                            </Form>
+
+                        </div>
+                    </div>
+                </>
+            )}
         </Disclosure>
     );
 };

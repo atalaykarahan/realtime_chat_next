@@ -13,16 +13,12 @@ const FriendsSettings = ({chatBoxStatus}: FriendsSettingsProps) => {
     if (!chatBoxStatus)
         return (
             <CustomCard
-                className=
-                    "flex-1 flex-col justify-between"
-            >
+                className="flex-1 flex-col flex">
                 <AddFriend/>
-                <div className="grid grid-cols-2 flex-1 gap-4 p-5">
-                    <FriendsComponent/>
-                    <div className="flex flex-col h-full gap-4">
-                        <RequestsComponent/>
-                        <BlockedComponent/>
-                    </div>
+                <div className="grid grid-cols-2 grid-rows-2 flex-1 overflow-y-auto gap-2 p-2">
+                    <FriendsComponent className="row-span-2"/>
+                    <RequestsComponent/>
+                    <BlockedComponent/>
                 </div>
             </CustomCard>
         );

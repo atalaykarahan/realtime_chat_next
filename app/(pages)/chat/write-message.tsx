@@ -47,7 +47,8 @@ const WriteMessage: React.FC<WriteMessageProps> = ({user, socket, room_id}) => {
     const onDrop = (files: any) => {
         console.log(files);
         //5 gb sinir byte cinsinden
-        dispatch(openFileBox({fileBoxStatus: true}))
+        dispatch(openFileBox({fileBoxStatus: true, name: files[0].name, size: files[0].size, type: files[0].type}))
+        console.log(files[0]);
         if (files[0].size > 5368709120) {
 
             console.log("bu 5gb boyutundan büyük bir dosya");

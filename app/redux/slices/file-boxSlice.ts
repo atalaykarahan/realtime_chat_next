@@ -2,6 +2,9 @@ import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 
 export interface FileItemSliceModel {
     fileBoxStatus: boolean;
+    name:string;
+    size:number;
+    type?:string;
 }
 
 interface InitialState {
@@ -22,6 +25,9 @@ export const fileBox = createSlice({
         closeFileBox: (state) => {
             state.value = {
                 fileBoxStatus: false,
+                name:"",
+                size:0,
+                type:"",
             };
         },
     },

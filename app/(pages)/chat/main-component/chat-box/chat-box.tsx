@@ -76,6 +76,7 @@ const ChatBox: React.FC<ChatBoxProps> = ({user, chatBoxValue}) => {
                 <ChatNavbar friend={chatBoxValue}/>
 
 
+
                 {/* Chat Message */}
                 <Speech room_id={chatBoxValue.room_id} user={user} messages={messages}/>
 
@@ -86,6 +87,8 @@ const ChatBox: React.FC<ChatBoxProps> = ({user, chatBoxValue}) => {
 
                 {/*burasi file kismi*/}
                 <FileBoxComponent/>
+
+
 
             </CustomCard>
         );

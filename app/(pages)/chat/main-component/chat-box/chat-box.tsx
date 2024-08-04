@@ -4,12 +4,14 @@ import ChatNavbar from "../../chat-navbar";
 import Speech from "@/app/(pages)/chat/main-component/speech/speech";
 import WriteMessage from "../../write-message";
 import {Message} from "@/models/Message";
-import {useEffect, useState} from "react";
+import React, {useEffect, useState} from "react";
 import io, {Socket} from "socket.io-client";
 import {MessageItemSliceModel} from "@/app/redux/slices/message-boxSlice";
 import ConnectionStatus from "@/components/connection-status";
 import {getChatHistoryByRoomId} from "@/app/api/services/message.Service";
 import {toast} from "sonner";
+import FileBoxComponent from "@/app/(pages)/chat/main-component/file-box-component/FileBoxComponent";
+
 
 interface ChatBoxProps {
     user: any;
@@ -69,9 +71,10 @@ const ChatBox: React.FC<ChatBoxProps> = ({user, chatBoxValue}) => {
     if (chatBoxValue.chatBoxStatus == true)
         return (
             <CustomCard
-                className="flex-1 flex-col justify-between flex">
+                className="flex-1 flex-col justify-between flex relative">
                 <ConnectionStatus statusTitle={connectionStatus}/>
                 <ChatNavbar friend={chatBoxValue}/>
+
 
                 {/* Chat Message */}
                 <Speech room_id={chatBoxValue.room_id} user={user} messages={messages}/>
@@ -80,6 +83,10 @@ const ChatBox: React.FC<ChatBoxProps> = ({user, chatBoxValue}) => {
                 <div className="mt-auto">
                     <WriteMessage room_id={chatBoxValue.room_id} user={user} socket={socket}/>
                 </div>
+
+                {/*burasi file kismi*/}
+                <FileBoxComponent/>
+
             </CustomCard>
         );
 

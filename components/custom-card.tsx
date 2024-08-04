@@ -1,19 +1,20 @@
-import { cn } from "@/lib/utils";
-import { Card } from "./ui/card";
+import {cn} from "@/lib/utils";
+import {Card} from "./ui/card";
 
 interface CustomCardProps {
-  className?: string;
-  children?: React.ReactNode;
+    className?: string;
+    children?: React.ReactNode;
+    style?: string;
 }
 
-const CustomCard: React.FC<CustomCardProps> = ({ className, children }) => {
-  return (
-    <Card
-      className={cn("backdrop-blur-sm bg-[#1F2938]/40 transition", className)}
-    >
-      {children}
-    </Card>
-  );
+const CustomCard: React.FC<CustomCardProps> = ({className, children}) => {
+    return (
+        <Card
+            className={cn("backdrop-blur-sm bg-[#1F2938]/40 transition", className)}
+        >
+            {children}
+        </Card>
+    );
 };
 
 export default CustomCard;

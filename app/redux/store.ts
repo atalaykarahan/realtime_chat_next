@@ -1,11 +1,13 @@
-import { configureStore } from '@reduxjs/toolkit'
+import {configureStore} from '@reduxjs/toolkit'
 import messageBoxReducer from './slices/message-boxSlice'
-import { TypedUseSelectorHook, useSelector } from 'react-redux'
+import fileBoxReducer from './slices/file-boxSlice'
+import {TypedUseSelectorHook, useSelector} from 'react-redux'
 
 export const store = configureStore({
-  reducer: {
-    messageBoxReducer,
-  },
+    reducer: {
+        messageBoxReducer,
+        fileBoxReducer
+    },
 })
 
 // Infer the `RootState` and `AppDispatch` types from the store itself

@@ -4,8 +4,8 @@ import FriendItem from "./friend-item/item";
 import {useEffect, useState} from "react";
 import {Friends} from "@/app/api/services/friendship.Service";
 import {cn} from "@/lib/utils";
-import RightBubble from "@/app/(pages)/chat/main-component/speech/bubbles/right-bubble";
-import LeftBubble from "@/app/(pages)/chat/main-component/speech/bubbles/left-bubble";
+import RightBubble from "@/app/(pages)/chat/main-component/chat-box/speech/bubbles/right-bubble";
+import LeftBubble from "@/app/(pages)/chat/main-component/chat-box/speech/bubbles/left-bubble";
 
 export interface FriendsModel {
     friend_mail: string;

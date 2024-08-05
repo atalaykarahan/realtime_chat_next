@@ -15,53 +15,37 @@ interface WriteMessageProps {
     user: any;
     socket: Socket | null;
     room_id: string;
+    onFileChange: (formData: FormData) => void;
 }
 
-const WriteMessage: React.FC<WriteMessageProps> = ({user, socket, room_id}) => {
+const WriteMessage: React.FC<WriteMessageProps> = ({user, socket, room_id, onFileChange}) => {
     const dispatch = useDispatch<AppDispatch>();
     const [newMessage, setNewMessage] = useState("");
 
-    const handleSendMessage = () => {
-        if (newMessage.trim() && user.id) {
-            sendMessage(room_id, newMessage);
-            setNewMessage("");
-        }
-    };
+    const sendMessage = () => {
+        newMessage.trim();
 
-    const sendMessage = (room_id: string, message: string) => {
-        if (socket && user) {
+        if (socket) {
             socket.emit("sendMessage", {
                 room_id,
-                message,
+                message: newMessage,
             });
         }
-    };
-
-    // for press ENTER then send a message
-    const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
-        if (e.key === 'Enter') {
-            handleSendMessage();
-        }
+        setNewMessage("");
     };
 
     const onDrop = (files: any) => {
-        console.log(files);
-        //5 gb sinir byte cinsinden
-        dispatch(openFileBox({fileBoxStatus: true, name: files[0].name, size: files[0].size, type: files[0].type}))
-        console.log(files[0]);
-        if (files[0].size > 5368709120) {
-
-            console.log("bu 5gb boyutundan büyük bir dosya");
-        }
         let formData = new FormData();
+        formData.append("file", files[0]);
+        onFileChange(formData);
 
-        const config = {
-            header: {'Content-Type': 'multipart/form-data'},
-        }
-
-        formData.append("files", files[0]);
-
-
+        //redux slice doldurma.
+        dispatch(openFileBox({
+            fileBoxStatus: true,
+            name: files[0].name,
+            size: files[0].size,
+            type: files[0].type,
+        }))
     }
 
     return (
@@ -77,7 +61,7 @@ const WriteMessage: React.FC<WriteMessageProps> = ({user, socket, room_id}) => {
                             placeholder="Type your message..."
                             value={newMessage}
                             onChange={(e) => setNewMessage(e.target.value)}
-                            onKeyDown={handleKeyDown}
+                            onKeyDown={(e) => e.key === 'Enter' ? sendMessage() : null}
                         />
                     </div>
                     {/*DROP FILE*/}
@@ -94,7 +78,7 @@ const WriteMessage: React.FC<WriteMessageProps> = ({user, socket, room_id}) => {
                             </section>
                         )}
                     </Dropzone>
-                    <div onClick={handleSendMessage}>
+                    <div onClick={sendMessage}>
                         <BiSolidSend className="text-[#4A32B0] text-[2rem]"/>
                     </div>
                 </div>

@@ -1,4 +1,4 @@
-import { getMyCookie } from "@/hooks/get-my-cookie";
+import { getMyCookie } from "@/lib/get-my-cookie";
 import axios from "../axios";
 
 // kayit olmak icin

@@ -1,8 +1,8 @@
 "use client";
 import CustomCard from "@/components/custom-card";
 import ChatNavbar from "../../chat-navbar";
-import Speech from "@/app/(pages)/chat/main-component/speech/speech";
-import WriteMessage from "../../write-message";
+import Speech from "@/app/(pages)/chat/main-component/chat-box/speech/speech";
+import WriteMessage from "./write-message/write-message";
 import {Message} from "@/models/Message";
 import React, {useEffect, useState} from "react";
 import io, {Socket} from "socket.io-client";
@@ -10,7 +10,7 @@ import {MessageItemSliceModel} from "@/app/redux/slices/message-boxSlice";
 import ConnectionStatus from "@/components/connection-status";
 import {getChatHistoryByRoomId} from "@/app/api/services/message.Service";
 import {toast} from "sonner";
-import FileBoxComponent from "@/app/(pages)/chat/main-component/file-box-component/FileBoxComponent";
+import FileBoxComponent from "@/app/(pages)/chat/main-component/chat-box/file-box-component/FileBoxComponent";
 
 
 interface ChatBoxProps {
@@ -23,6 +23,9 @@ const ChatBox: React.FC<ChatBoxProps> = ({user, chatBoxValue}) => {
         useState<string>("Bağlanıyor...");
     const [socket, setSocket] = useState<Socket | null>(null);
     const [messages, setMessages] = useState<Message[]>([]);
+    const [formData, setFormData] = useState<FormData | null>(null);
+
+
     const socketUrl = process.env.SOCKET_IO_URL;
     useEffect(() => {
         if (!chatBoxValue?.room_id) return; //room_id degeri null iken socket baslamasin diye
@@ -51,9 +54,9 @@ const ChatBox: React.FC<ChatBoxProps> = ({user, chatBoxValue}) => {
             });
         }
         setSocket(newSocket);
-        return () => {
-            if (newSocket) newSocket.close();
-        };
+        // return () => {
+        //     if (newSocket) newSocket.close();
+        // };
         //#endregion
     }, [chatBoxValue.room_id]);
 
@@ -68,6 +71,14 @@ const ChatBox: React.FC<ChatBoxProps> = ({user, chatBoxValue}) => {
         }
     }
 
+
+    const handleFileChange = (formData: FormData) => {
+
+
+
+        setFormData(formData);
+    };
+
     if (chatBoxValue.chatBoxStatus == true)
         return (
             <CustomCard
@@ -76,18 +87,17 @@ const ChatBox: React.FC<ChatBoxProps> = ({user, chatBoxValue}) => {
                 <ChatNavbar friend={chatBoxValue}/>
 
 
-
                 {/* Chat Message */}
                 <Speech room_id={chatBoxValue.room_id} user={user} messages={messages}/>
 
                 {/* write new message section */}
                 <div className="mt-auto">
-                    <WriteMessage room_id={chatBoxValue.room_id} user={user} socket={socket}/>
+                    <WriteMessage room_id={chatBoxValue.room_id} user={user} socket={socket}
+                                  onFileChange={(e) => handleFileChange(e)}/>
                 </div>
 
                 {/*burasi file kismi*/}
-                <FileBoxComponent/>
-
+                <FileBoxComponent formData={formData} room_id={chatBoxValue.room_id} user={user} socket={socket}/>
 
 
             </CustomCard>

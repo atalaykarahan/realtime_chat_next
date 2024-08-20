@@ -1,8 +1,7 @@
 import axios from "../axios";
 
 
-export const UploadFile = async (formData: FormData, setUploadProgress: (progress: number) => void) => {
-
+export const uploadFile = async (formData: FormData, setUploadProgress: (progress: number) => void) => {
     return await axios.post("/file", formData, {
         headers: {
             'Content-Type': 'multipart/form-data',
@@ -15,5 +14,23 @@ export const UploadFile = async (formData: FormData, setUploadProgress: (progres
         },
     });
 };
+
+
+//--------test region
+
+
+// export const uploadTestFunc = async (fileName: string, fileType: string, partCount: number) => {
+//     const body = {
+//         fileName: fileName,
+//         fileType: fileType,
+//         partCount: partCount,
+//     }
+//     return await axios.post('/file/upload/uploadinit', body);
+// }
+
+
+
+
+
 
 

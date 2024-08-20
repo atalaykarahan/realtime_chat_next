@@ -11,7 +11,9 @@ import {useDispatch} from "react-redux";
 import {closeFileBox} from "@/app/redux/slices/file-boxSlice";
 import {MessageItemSliceModel} from "@/app/redux/slices/message-boxSlice";
 import {Socket} from "socket.io-client";
-import {UploadFile} from "@/app/api/services/file.Service";
+
+import axios from "@/app/api/axios";
+import {uploadTestFunc} from "@/app/api/services/file.Service";
 
 interface FileBoxProps {
     user: any;
@@ -60,37 +62,63 @@ const FileBoxComponent: React.FC<FileBoxProps> = ({user, socket, room_id, formDa
 
     const sendFile = async () => {
         if (formData) {
-
-            // if (newMessage) {
-            //     newMessage.trim();
-            //     formData.append('message', newMessage);
-            // }
-
-            if (newMessage) {
-                formData.append('message', newMessage.trim());
-            }
-
-            try {
-                const fileResponse = await UploadFile(formData, setUploadProgress);
-
-                console.log('File uploaded successfully:', fileResponse.data);
-            } catch (e) {
-                console.log('file yüklerken hata: ', e);
-            }
-
-
-            // const file = formData?.get('file');
-
-
+            await uploadFileTestLav(formData.get('file') as File);
         }
-
-
-        // if (socket && file) {
-        //     // const uniqueUploadId = generateUUID();
-        //     // setUploadId(uniqueUploadId);
-        // }
         setNewMessage(null);
     };
+
+
+    const uploadFileTestLav = async (file: File) => {
+
+        const fileSize = file.size;
+        const partCount = 6; // Her zaman 6 parça
+        const chunkSize = Math.ceil(fileSize / partCount);
+
+        const response = await axios.post('/file/uploadinit', {
+            fileName: file.name,
+            fileType: file.type,
+            fileSize: file.size,
+        });
+
+        // const response = await uploadTestFunc();
+
+        const {uploadId, presignedUrls} = response.data;
+
+
+        console.log('atalay: ', uploadId, 'karahan: ', presignedUrls);
+
+        //buraya kadar 6 adet link geliyor partlar icin
+
+
+        const uploadPromises = presignedUrls.map(async (urlObj: any, index: number) => {
+            const start = index * chunkSize;
+            const end = Math.min(start + chunkSize, fileSize);
+            const chunk = file.slice(start, end);
+
+            await axios.put(urlObj.url, chunk, {
+                headers: {
+                    'Content-Type': file.type,
+                },
+                onUploadProgress: (progressEvent) => {
+                    const progress = Math.round(
+                        ((index + 1) / partCount) * 100
+                    );
+                    setUploadProgress(progress);
+                },
+            });
+        });
+
+        await Promise.all(uploadPromises);
+
+        // Multipart upload'u tamamla
+        await axios.post('/file/complete', {
+            fileName: file.name,
+            uploadId,
+        });
+
+
+    }
+
 
     const onClose = () => {
         setUploadProgress(0);

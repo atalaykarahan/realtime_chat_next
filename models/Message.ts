@@ -3,6 +3,6 @@ export interface Message {
     message: string;
     sender_id:string;
     message_status: "unread" | "read";
-    createdAt: Date;
-    updatedAt: Date;
+    createdAt: string;
+    updatedAt: string;
   }

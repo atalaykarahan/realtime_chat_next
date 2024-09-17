@@ -1,63 +1,61 @@
 "use client";
 import { useCurrentUser } from "@/hooks/use-current-user";
-import { Message } from "@/models/Message";
 import { useEffect, useState } from "react";
-import ChatBox from "./chat-box/chat-box";
-import FriendsSettings from "./friends/page";
 import Sidebar from "./sidebar/sidebar";
-import { useAppSelector } from "@/app/redux/store";
-import io, {Socket} from "socket.io-client";
-import { toast } from "sonner";
+import { useDispatch } from "react-redux";
+import io, { Socket } from "socket.io-client";
+import MainComponent from "@/app/(pages)/chat/main-component/page";
+import { AppDispatch } from "@/app/redux/store";
+import { setUser } from "@/app/redux/slices/userSlice";
 
 const ChatPage = () => {
   const user = useCurrentUser();
-  const chatBoxValue = useAppSelector((state) => state.messageBoxReducer.value);
-
-  const [connectionStatus, setConnectionStatus] =
-    useState<string>("Bağlanıyor...");
+  const dispatch = useDispatch<AppDispatch>();
+  
   const [socket, setSocket] = useState<Socket | null>(null);
   const socketUrl = process.env.SOCKET_IO_URL;
   useEffect(() => {
+    console.warn("user", user)
+    if (user) {
+      dispatch(setUser({
+        id: user.id || "", 
+        name: user.name || "",
+        mail: user.email || "",
+        photo: user.image || "",
+        role: user.role || ""
+      }));
+    }
+
     const newSocket = io(socketUrl as string, {
       transports: ["websocket", "polling"],
     });
-  
+
     newSocket.on("connect", () => {
-      setConnectionStatus("Bağlandı");
+      console.log("baglandi");
     });
     newSocket.on("disconnect", () => {
-      setConnectionStatus("Bağlanamadı");
+      console.log("disconnected");
     });
     newSocket.on("connect_error", (error) => {
-      setConnectionStatus(`Bağlantı Hatası: ${error.message}`);
+      console.error(`Bağlantı Hatası: ${error.message}`);
     });
-  
+
+    newSocket.emit("joinRoom", "notification");
+    
     setSocket(newSocket);
     return () => {
-      if (newSocket) newSocket.close();
+      if (newSocket) newSocket.disconnect();
     };
   }, [socketUrl]);
+
   return (
-    <>
-      <div
-        className="h-screen w-screen p-6 flex gap-5 relative"
-        style={{ zIndex: "1" }}
-      >
-        {/* userın id degerini gormek icin */}
-        {/* {user && (
-        <div className="bg-white"> {user.id}</div>
-        )} */}
-
-        {/* {JSON.stringify(session)} */}
-        <Sidebar user={user} />
-
-        {/* friends settings */}
-        <FriendsSettings socket={socket} />
-
-        {/* chat box */}
-        <ChatBox chatBoxValue={chatBoxValue} user={user} socket={socket} />
-      </div>
-    </>
+    <div
+      className="h-screen w-screen p-6 flex gap-5 relative"
+      style={{ zIndex: "1" }}
+    >
+      <Sidebar user={user}  socket={socket}/>
+      <MainComponent user={user} socket={socket} />
+    </div>
   );
 };
 

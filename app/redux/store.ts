@@ -1,10 +1,12 @@
 import { configureStore } from '@reduxjs/toolkit'
-import messageBoxReducer from './slices/message-boxSlice'
+import messageBoxReducer from './slices/messageBoxSlice'
 import { TypedUseSelectorHook, useSelector } from 'react-redux'
+import chatListReducer from './slices/chatlistSlice'
 
 export const store = configureStore({
   reducer: {
     messageBoxReducer,
+    chatListReducer,
   },
 })
 

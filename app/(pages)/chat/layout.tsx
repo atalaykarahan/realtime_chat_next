@@ -7,7 +7,7 @@ const ChatLayout = async ({ children }: { children: React.ReactNode }) => {
   return (
     <SessionProvider session={session}>
       {children}
-       <BackgroundBeams />
+      {/* <BackgroundBeams /> */}
     </SessionProvider>
   );
 };

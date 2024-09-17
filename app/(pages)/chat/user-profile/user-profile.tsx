@@ -4,7 +4,16 @@ import Image from "next/image";
 
 import Dropdown from "./dropdown";
 
-const UserProfile = ({ user }: any) => {
+interface UserProfileProps {
+  user: any;
+  onSearch: (searchTerm: string) => void;
+}
+
+const UserProfile = ({ user, onSearch }: UserProfileProps) => {
+  const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    onSearch(e.target.value);
+  };
+
   return (
     <div className="px-3 py-5 border-b border-[#5C6B81]">
       <div className="gap-4 flex">
@@ -15,11 +24,9 @@ const UserProfile = ({ user }: any) => {
                 width={40}
                 height={40}
                 className="aspect-square h-full w-full"
-                src={
-                  user.image ??
-                  "https://dash-tail.vercel.app/_next/static/media/avatar-2.1136fd53.jpg"
-                }
+                src={user.image ?? "/profile-circle.svg"}
                 alt="tst"
+                loading="eager"
               />
             </span>
             {/* if user online */}
@@ -45,7 +52,7 @@ const UserProfile = ({ user }: any) => {
         </div>
       </div>
       <div className="pt-5">
-        <Search placeholder="İsim'e göre ara" />
+        <Search placeholder="İsim'e göre ara" onChange={handleSearchChange} />
       </div>
     </div>
   );

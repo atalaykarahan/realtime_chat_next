@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 
 const Description = () => {
   return (
-    <div className="text-white bg-black text-sm md:text-2xl max-w-2xl text-center">
+    <div className="text-white bg-transparent text-sm md:text-2xl max-w-2xl text-center">
       <HeroHighlight>
         <motion.h1
           initial={{

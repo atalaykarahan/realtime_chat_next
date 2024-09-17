@@ -46,13 +46,12 @@ const ChatPage = () => {
     return () => {
       if (newSocket) newSocket.disconnect();
     };
-  }, [socketUrl]);
-
+  }, [socketUrl]); 
+   
   return (
     <div
       className="h-screen w-screen p-6 flex gap-5 relative"
-      style={{ zIndex: "1" }}
-    >
+      style={{ zIndex: "1" }}>
       <Sidebar user={user}  socket={socket}/>
       <MainComponent user={user} socket={socket} />
     </div>

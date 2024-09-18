@@ -16,9 +16,12 @@ import { UsernameSchemas } from "@/schemas/username";
 import { updateUsernameByMail } from "@/app/api/services/user.Service";
 import { toast } from "sonner";
 import { useSession } from "next-auth/react";
+import { setUser } from "@/app/redux/slices/userSlice";
+import { AppDispatch } from "@/app/redux/store";
+import { useDispatch } from "react-redux";
 
 const ProfileForm = ({ user }: any) => {
-  const session2 = useSession();
+  const dispatch = useDispatch<AppDispatch>();
 
   const form = useForm<z.infer<typeof UsernameSchemas>>({
     resolver: zodResolver(UsernameSchemas),
@@ -34,6 +37,7 @@ const ProfileForm = ({ user }: any) => {
       toast("BLOKLANAN KİŞİLERİ GETİRİRKEN BİLİNMEYEN BİR HATA MEYDANA GELDİ");
       console.error(res);
     }
+
 
     console.log("updateduiser", user);
   }

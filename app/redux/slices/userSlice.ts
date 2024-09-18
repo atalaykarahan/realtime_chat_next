@@ -4,7 +4,7 @@ export interface UserSliceModel {
     id: string
     name: string
     mail: string
-    photo: string
+    image: string
     role: string
 }
 
@@ -17,7 +17,7 @@ const initialState: InitialState = {
         id: "",
         name: "",
         mail: "",
-        photo: "",
+        image: "",
         role: "",
     },
 }

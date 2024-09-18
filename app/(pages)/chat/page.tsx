@@ -7,22 +7,24 @@ import io, { Socket } from "socket.io-client";
 import MainComponent from "@/app/(pages)/chat/main-component/page";
 import { AppDispatch } from "@/app/redux/store";
 import { setUser } from "@/app/redux/slices/userSlice";
+import {useAppSelector} from "@/app/redux/store";
 
 const ChatPage = () => {
-  const user = useCurrentUser();
+  const currentUser  = useCurrentUser();
   const dispatch = useDispatch<AppDispatch>();
-  
+  const user = useAppSelector((state) => state.userReducer.value);
+
   const [socket, setSocket] = useState<Socket | null>(null);
   const socketUrl = process.env.SOCKET_IO_URL;
   useEffect(() => {
-    console.warn("user", user)
-    if (user) {
+    console.warn("user", currentUser)
+    if (currentUser ) {
       dispatch(setUser({
-        id: user.id || "", 
-        name: user.name || "",
-        mail: user.email || "",
-        photo: user.image || "",
-        role: user.role || ""
+        id: currentUser.id || "", 
+        name: currentUser.name || "",
+        mail: currentUser.email || "",
+        image: currentUser.image || "",
+        role: currentUser.role || ""
       }));
     }
 

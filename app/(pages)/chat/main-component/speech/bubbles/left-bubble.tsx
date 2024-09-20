@@ -1,20 +1,25 @@
 import Image from "next/image";
 import Dropdown from "../dropdown";
 import { extractTime } from "@/lib/utils";
+import { Message } from "@/models/Message";
 
 interface LeftBubbleProps {
   user: any;
   group?: boolean;
-  message: string;
+  msg: Message;
   time: string;
+  onDelete: (id: string) => void; 
+
 }
 
 
 const LeftBubble: React.FC<LeftBubbleProps> = ({
   user,
   group,
-  message,
+  msg,
   time,
+  onDelete, 
+
 }) => {
   const formattedTime = extractTime(time);
 
@@ -28,7 +33,7 @@ const LeftBubble: React.FC<LeftBubbleProps> = ({
               <Image
                 width={40}
                 height={40}
-                src={user?.image}
+                src={user?.photo}
                 alt="/images/avatar/avatar-1.jpg"
                 className="block w-full h-full object-cover rounded-full"
                     loading="eager"
@@ -43,12 +48,12 @@ const LeftBubble: React.FC<LeftBubbleProps> = ({
             <div className="flex items-center gap-1">
               <div className="whitespace-pre-wrap break-all relative z-[1]">
                 <div className="bg-[#1f2937] text-white  text-sm  py-2 px-3 rounded-2xl  flex-1  ">
-                  {message}
+                  {msg.message}
                 </div>
               </div>
               {/* option button */}
               <div className="opacity-0 invisible group-hover:opacity-100 group-hover:visible flex">
-              <Dropdown isLeftMode={true}/>
+              <Dropdown isLeftMode={true} msg={msg} onDelete={onDelete}/>
               </div>
             </div>
             {/* text time */}

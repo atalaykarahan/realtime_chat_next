@@ -12,13 +12,13 @@ export const loginAction = async (
   id: string,
   name: string,
   email: string,
-  image: string
+  photo: string
 ) => {
   await signIn("credentials", {
     id,
     name,
     email,
-    image,
+    photo,
     redirectTo: DEFAULT_LOGIN_REDIRECT,
   });
 };

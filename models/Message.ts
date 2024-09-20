@@ -5,4 +5,5 @@ export interface Message {
     message_status: "unread" | "read";
     createdAt: string;
     updatedAt: string;
+    deletedAt: string
   }

@@ -3,13 +3,16 @@ import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { MdOutlineFileUpload,MdOutlineCancel  } from "react-icons/md";
 import { SlPicture } from "react-icons/sl";
+import { uploadProfilePicture } from "@/app/api/services/user.Service";
+import { useSession } from "next-auth/react";
 
 const ProfilePicture = ({ user }: any) => {
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [imagePreview, setImagePreview] = useState<string | null>(
-    user.image ?? "/profile-circle.svg"
+    user.photo ?? "/profile-circle.svg"
   );
   const fileInputRef = useRef<HTMLInputElement>(null);
+  const { update } = useSession();
 
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0] ?? null;
@@ -29,18 +32,25 @@ const ProfilePicture = ({ user }: any) => {
     }
   };
 
-  const handleUpload = () => {
+  const handleUpload = async () => {
     if (!selectedFile) return;
 
-    console.log("Selected file:", selectedFile);
+    try {
+        const result = await uploadProfilePicture(selectedFile);
+        console.log("File URL:", result.data);
 
-    setSelectedFile(null);
-    setImagePreview(user.image ?? "/profile-circle.svg");
-  };
 
+        setSelectedFile(null);
+    } catch (error) {
+        console.error("Error uploading file:", error);
+    }
+    await update();
+
+};
+  
   const handleCancel = () => {
     setSelectedFile(null);
-    setImagePreview(user.image ?? "/profile-circle.svg");
+    setImagePreview(user.photo ?? "/profile-circle.svg");
     if (fileInputRef.current) {
       fileInputRef.current.value = "";
     }

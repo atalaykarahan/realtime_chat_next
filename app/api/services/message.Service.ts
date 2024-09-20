@@ -22,4 +22,17 @@ export const getChatHistoryByRoomId = async (room_id: string) => {
     return await axios.post("/message/history", body);
 }
 
+export const deleteById = async (messageId: string) => {
+    return await axios.delete(`/message/${messageId}`);
+}
+
+export const updateMessageByIdBody = async (messageId: string, message: string) => {
+    const body = {
+        message_id : messageId,
+        message: message
+    }
+    return await axios.patch("/message",body)
+}
+
+
 

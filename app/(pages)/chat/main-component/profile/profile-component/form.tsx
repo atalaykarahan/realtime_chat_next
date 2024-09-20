@@ -22,6 +22,7 @@ import { useDispatch } from "react-redux";
 
 const ProfileForm = ({ user }: any) => {
   const dispatch = useDispatch<AppDispatch>();
+  const { update } = useSession();
 
   const form = useForm<z.infer<typeof UsernameSchemas>>({
     resolver: zodResolver(UsernameSchemas),
@@ -38,6 +39,7 @@ const ProfileForm = ({ user }: any) => {
       console.error(res);
     }
 
+    await update();
 
     console.log("updateduiser", user);
   }
@@ -69,6 +71,18 @@ const ProfileForm = ({ user }: any) => {
           </FormControl>
           <FormDescription>
             This email belongs to your Google account and cannot be changed.
+          </FormDescription>
+          <FormMessage />
+        </FormItem>
+
+        <FormItem>
+          <FormLabel>Role</FormLabel>
+          <FormControl>
+            <Input className="capitalize " placeholder={user.role} disabled />
+          </FormControl>
+          <FormDescription>
+            If your role is standard, you can send a maximum of 500MB. If your
+            role is high, you can send up to 2GB.
           </FormDescription>
           <FormMessage />
         </FormItem>

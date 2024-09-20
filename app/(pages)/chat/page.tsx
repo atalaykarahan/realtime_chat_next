@@ -11,22 +11,11 @@ import {useAppSelector} from "@/app/redux/store";
 
 const ChatPage = () => {
   const currentUser  = useCurrentUser();
-  const dispatch = useDispatch<AppDispatch>();
-  const user = useAppSelector((state) => state.userReducer.value);
-
   const [socket, setSocket] = useState<Socket | null>(null);
   const socketUrl = process.env.SOCKET_IO_URL;
   useEffect(() => {
     console.warn("user", currentUser)
-    if (currentUser ) {
-      dispatch(setUser({
-        id: currentUser.id || "", 
-        name: currentUser.name || "",
-        mail: currentUser.email || "",
-        image: currentUser.image || "",
-        role: currentUser.role || ""
-      }));
-    }
+  
 
     const newSocket = io(socketUrl as string, {
       transports: ["websocket", "polling"],
@@ -54,8 +43,8 @@ const ChatPage = () => {
     <div
       className="h-screen w-screen p-6 flex gap-5 relative"
       style={{ zIndex: "1" }}>
-      <Sidebar user={user}  socket={socket}/>
-      <MainComponent user={user} socket={socket} />
+      <Sidebar user={currentUser}  socket={socket}/>
+      <MainComponent user={currentUser} socket={socket} />
     </div>
   );
 };

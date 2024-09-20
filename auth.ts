@@ -8,7 +8,9 @@ import { cookies } from "next/dist/client/components/headers";
  * hatasi veriyor bunun onune gecmek icin yazildi */
 //#region EXTENDED USER
 export type ExtendedUser = DefaultSession["user"] & {
-  role: any;
+  role: "standard" | "high";
+  name: any;
+  photo: any;
 };
 declare module "next-auth" {
   interface Session {
@@ -24,6 +26,9 @@ export const { auth, handlers, signIn, signOut } = NextAuth({
        * ve session icindede user objesi olusur */
       if (token.sub && session.user) {
         //front-end tarafinda session icinde user_id degerine erismek icin
+        session.user.name = token.username || session.user.name;
+        session.user.photo = token.photo || session.user.photo;
+
         session.user.id = token.sub;
       }
 
@@ -47,6 +52,12 @@ export const { auth, handlers, signIn, signOut } = NextAuth({
         await signOut();
       }
 
+      if (existingUser && existingUser.name && existingUser.photo) {
+        token.name = existingUser.name;
+        token.photo = existingUser.photo;
+
+      }
+
       token.role = existingUser.role;
       return token;
     },
@@ -59,7 +70,8 @@ export const { auth, handlers, signIn, signOut } = NextAuth({
           id: credentials.id as string,
           name: credentials.name as string,
           email: credentials.email as string,
-          image: credentials.image as string,
+          photo: credentials.photo as string,
+          role: credentials.role as string
         };
       },
     }),

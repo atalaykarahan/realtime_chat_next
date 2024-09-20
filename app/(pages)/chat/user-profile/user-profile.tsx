@@ -24,7 +24,7 @@ const UserProfile = ({ user, onSearch }: UserProfileProps) => {
                 width={40}
                 height={40}
                 className="aspect-square h-full w-full"
-                src={user.image ?? "/profile-circle.svg"}
+                src={user.photo ?? "/profile-circle.svg"}
                 alt="tst"
                 loading="eager"
               />

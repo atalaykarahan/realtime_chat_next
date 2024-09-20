@@ -93,10 +93,10 @@ const MessageItem: React.FC<MessageItemProps> = ({
                 ? message.last_message.substring(0, 15) + "..."
                 : message.last_message}
             </span>
-          </div>
-        </div>
-      </div>
-      <div className="flex-none  flex-col items-end  gap-2 hidden lg:flex">
+                    </div>
+                </div>
+            </div>
+            <div className="flex-none  flex-col items-end  gap-2 hidden lg:flex">
         <span className="text-xs text-white text-end uppercase ">
           {formattedTime}
         </span>

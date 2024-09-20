@@ -27,6 +27,7 @@ const AddFriend: React.FC<AddFriendProps> = ({socket}) => {
     });
 
     const onSubmit = async (values: z.infer<typeof AddFriendSchemas>) => {
+
         let email = values.email
         console.log(socket)
         if (socket) {
@@ -39,7 +40,6 @@ const AddFriend: React.FC<AddFriendProps> = ({socket}) => {
             <div className="relative  px-5 flex h-20 items-center justify-between gap-5">
                 <Form {...form}>
                     <form
-                        
                         className="w-full flex gap-5"
                         onSubmit={form.handleSubmit(onSubmit)}
                     >
@@ -53,6 +53,7 @@ const AddFriend: React.FC<AddFriendProps> = ({socket}) => {
                                             {...field}
                                             id="email"
                                             placeholder="E-Posta"
+
                                         />
                                     </FormControl>
                                     <FormMessage/>
@@ -60,7 +61,6 @@ const AddFriend: React.FC<AddFriendProps> = ({socket}) => {
                             )}
                         />
                         <FormError className="mb-3" message={errorMessage}/>
-
                         <Button
                             type="submit"
                             className="bg-[#4A32B0] border-none  hover:bg-[#4A32B0] hover:text-white text-white"

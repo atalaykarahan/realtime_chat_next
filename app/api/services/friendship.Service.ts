@@ -1,6 +1,5 @@
 import axios from "../axios";
 
-
 // get all friends
 export const Friends = async () => {
     return await axios.get("/friend");
@@ -12,11 +11,11 @@ export const Blocked = async () => {
 }
 
 // block user
-export const Block = async (friendMail:string) => {
+export const Block = async (friendMail: string) => {
     const body = {
         mail : friendMail
     }
-    return await axios.patch("/friend/block",body)
+    return await axios.patch("/friend/block", body)
 }
 
 // remove friend

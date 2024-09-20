@@ -24,6 +24,7 @@ const BlockedItem: React.FC<BlockedProps> = ({blocked}) => {
                 }
                 alt="tst"
                 loading="eager"
+
             />
           </span>
                 </div>

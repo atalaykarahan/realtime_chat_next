@@ -1,4 +1,5 @@
 "use client";
+import defaultAvatar from '@/public/images/avatar/gojo_profile.jpg'
 import Image from "next/image";
 import Options from "./options";
 import {BlockedModel} from "../blocked";
@@ -18,10 +19,7 @@ const BlockedItem: React.FC<BlockedProps> = ({blocked}) => {
                 width={40}
                 height={40}
                 className="aspect-square h-full w-full"
-                src={
-                    blocked.user_photo ||
-                    "https://dash-tail.vercel.app/_next/static/media/avatar-2.1136fd53.jpg"
-                }
+                src={defaultAvatar}
                 alt="tst"
                 loading="eager"
             />

@@ -4,6 +4,7 @@ import {MessageItemModel} from "./sidebar";
 import {openChatBox} from "@/app/redux/slices/message-boxSlice";
 import {useDispatch} from "react-redux"
 import {AppDispatch} from "@/app/redux/store";
+import defaultAvatar from '@/public/images/avatar/gojo_profile.jpg'
 
 interface MessageItemProps {
     message: MessageItemModel;
@@ -31,10 +32,7 @@ const MessageItem: React.FC<MessageItemProps> = ({message}) => {
                 width={40}
                 height={40}
                 className="aspect-square h-full w-full"
-                src={
-                    message.user_photo ||
-                    "https://dash-tail.vercel.app/_next/static/media/avatar-2.1136fd53.jpg"
-                }
+                src={defaultAvatar}
                 alt="tst"
                 loading="eager"
             />
